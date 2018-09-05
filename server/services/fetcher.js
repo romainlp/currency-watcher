@@ -34,8 +34,6 @@ const fetch = async function (from, to) {
       return lastRate
     }
   }
-
-  console.log('Fetch', from, to);
   
   let args = {
     'amount': config.CURRENCY_AMOUNT,

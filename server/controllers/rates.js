@@ -9,7 +9,9 @@ const Rate = require('../models/Rate');
 const get = async (ctx) => {
 
   if (ctx.params.limit === undefined) {
-    ctx.params.limit = config.DEFAULT_NUMBER_RESULTS
+    ctx.params.limit = config.DEFAULT_NUMBER_RESULTS * config.CURRENCIES.length;
+  } else {
+    ctx.params.limit = ctx.params.limit * config.CURRENCIES.length;
   }
 
   const rates = await Rate.find({
@@ -22,6 +24,16 @@ const get = async (ctx) => {
     }
   );
 
+  const res = {};
+  const label = [];
+  const group = config.CURRENCIES.filter((element) => { return element != ctx.params.from});
+  group.forEach((currency) => {
+    res[currency] = []
+  })
+  rates.forEach((rate) => {
+    res[rate.currencyTo].push({ date: rate.date, rate: rate.rate })
+  })
+
   if (!rates) {
     throw new Error('Threre was an error retrieving rates.')
   } else {
@@ -31,7 +43,7 @@ const get = async (ctx) => {
     ctx.body = {
       min: min,
       max: max,
-      rates: rates
+      rates: res
     }
   }
 }
