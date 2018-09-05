@@ -7,6 +7,8 @@ const requestController = require('./controller/request');
 const app = new Koa();
 const router = new Router();
 
+console.log(config)
+
 // Pretty JSON
 app.use(json());
 
