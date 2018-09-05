@@ -112,7 +112,6 @@ class LineChartClass extends React.Component {
   }
 
   async loadData () {
-    console.log('http://127.0.0.1:3000/rates/'+this.props.currencyFrom.value+'/'+this.props.currencyTo.value+'/15')
     let response = await axios.get('http://127.0.0.1:3000/rates/'+this.props.currencyFrom.value+'/'+this.props.currencyTo.value+'/15')
     if (response.status == 200) {
       this.props.setRates(response.data.rates)

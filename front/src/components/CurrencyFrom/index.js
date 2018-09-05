@@ -2,7 +2,7 @@ import React from 'react'
 import Select from 'react-select';
 import { connect } from "react-redux";
 import { CURRENCIES } from '../../config'
-import { setCurrencyFrom } from "../../actions/index"
+import { setCurrencyFrom, setCurrencyTo } from "../../actions/index"
 
 const mapStateToProps = state => {
   return {
@@ -12,7 +12,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    setCurrencyFrom: rates => dispatch(setCurrencyFrom(rates))
+    setCurrencyFrom: currency => dispatch(setCurrencyFrom(currency)),
+    setCurrencyTo: currency => dispatch(setCurrencyTo(currency))
   }
 }
 
@@ -20,11 +21,13 @@ class CurrencyFromClass extends React.Component {
 
   handleChange (selectedOption) {
     this.props.setCurrencyFrom(selectedOption);
+    const currencies = CURRENCIES.filter(currency => currency.value != selectedOption.value)
+    this.props.setCurrencyTo(currencies[0]);
   }
 
   render () {
     return (
-      <div className="box currency-chooser">
+      <div className=" currency-chooser">
         <h2>From...</h2>
         <div className="form-group">
           <Select

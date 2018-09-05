@@ -26,11 +26,11 @@ class CurrencyToClass extends React.Component {
   render () {
     const currencies = CURRENCIES.filter(currency => currency.value != this.props.currencyFrom.value)
     return (
-      <div className="box currency-chooser">
+      <div className=" currency-chooser">
         <h2>...to</h2>
         <div className="form-group">
           <Select
-            value={currencies[0]}
+            value={this.props.currencyTo}
             onChange={this.handleChange.bind(this)}
             options={currencies}
           />

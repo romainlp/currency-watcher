@@ -16,11 +16,16 @@ class App extends Component {
         </div>
         <div className="container">
           <div className="row">
-            <div className="col-6">
-              <CurrencyFrom />
+            <div className="col-4">
+              <div className="box">
+                <CurrencyFrom />
+                <CurrencyTo />
+              </div>
             </div>
-            <div className="col-6">
-              <CurrencyTo />
+            <div className="col-8">
+              <div className="box">
+              <h2>Values</h2>
+              </div>
             </div>
           </div>
         </div>
