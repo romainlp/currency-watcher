@@ -7,8 +7,6 @@ const requestController = require('./controller/request');
 const app = new Koa();
 const router = new Router();
 
-console.log(config)
-
 // Pretty JSON
 app.use(json());
 
@@ -16,7 +14,8 @@ app.use(json());
 app.use(async (ctx, next) => {
   await next();
   const rt = ctx.response.get('X-Response-Time');
-  console.log(`${ctx.method} ${ctx.url} - ${rt}`);
+  const st = ctx.response.status;
+  console.log(`${ctx.method} - ${st} - ${ctx.url} - ${rt}`);
 });
 
 // x-response-time
@@ -35,8 +34,21 @@ router.get('/', async (ctx, next) => {
   ctx.body = 'Currency Watcher Fetcher'
 })
 
-router.get('/fetch', requestController.fetch)
+router.get('/fetch/:from/:to', requestController.fetch)
 router.get('/requests', requestController.getRequests)
+
+// Error handler
+app.use(async (ctx, next) => {
+  try {
+    await next();
+  } catch (err) {
+    // will only respond with JSON
+    ctx.status = err.statusCode || err.status || 500;
+    ctx.body = {
+      message: err.message
+    };
+  }
+})
 
 app
   .use(router.routes())

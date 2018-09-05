@@ -1,5 +1,6 @@
 import React from 'react'
 import {Chart, Line} from 'react-chartjs-2'
+import './LineChart.scss'
 
 class LineChart extends React.Component {
 

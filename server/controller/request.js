@@ -8,8 +8,18 @@ const Request = require('../model/Request');
  * - We save the request every minutes
  */
 exports.fetch = async (ctx) => {
+  if (config.CURRENCIES.indexOf(ctx.params.from) === -1
+    || config.CURRENCIES.indexOf(ctx.params.to) === -1) {
+    throw new Error('Invalid currency', 400)
+  }
+  if (ctx.params.to == ctx.params.from) {
+    throw new Error('Currency have to be different', 400)
+  }
   const lastRequest = await Request.findOne(
-    {}, 
+    {
+      currencyFrom: ctx.params.from,
+      currencyTo: ctx.params.to
+    }, 
     {}, 
     {
       sort: { 'date' : -1 }
@@ -19,15 +29,14 @@ exports.fetch = async (ctx) => {
     if (moment().isSame(dateRequest, 'minute')) {
       ctx.body = lastRequest
     } else {
-      console.log('Fetch new request ', moment().format())
       let args = {
         'amount': config.CURRENCY_AMOUNT,
         'amountCurrency': 'source',
         'hasDiscount': false,
         'isFixedRate': false,
         'isGuaranteedFixedTarget': false,
-        'sourceCurrency': config.CURRENCY_FROM,
-        'targetCurrency': config.CURRENCY_TO
+        'sourceCurrency': ctx.params.from,
+        'targetCurrency': ctx.params.to
       }
       try {
         const response = await axios.get(
@@ -39,15 +48,14 @@ exports.fetch = async (ctx) => {
               'X-Authorization-key': config.TRANSFERWISE_KEY
             }
           })
-        const request = Request.create({
+        const request = await Request.create({
           currencyFrom: config.CURRENCY_FROM,
           currencyTo: config.CURRENCY_TO,
           datas: response.data
         })
-        ctx.body = response.data
+        ctx.body = request
       } catch (error) {
-        console.log(error)
-        ctx.body = error
+        throw new Error(error)
       }
     }
   }
