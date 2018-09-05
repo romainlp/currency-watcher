@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import store from './store/'
 import App from './App'
 import registerServiceWorker from './registerServiceWorker'
-import { addRequest } from './actions/index'
 
 window.store = store
 

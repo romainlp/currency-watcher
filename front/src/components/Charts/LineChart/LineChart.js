@@ -1,10 +1,13 @@
 import React from 'react'
-import { connect } from "react-redux";
+import { connect } from 'react-redux'
 import { Chart, Line } from 'react-chartjs-2'
-import axios from 'axios'
 import moment from 'moment'
-import { setRates } from "../../../actions/index"
+import { setRates } from '../../../store/actions/index'
+import api from '../../../api'
 
+import FlagIconFactory from 'react-flag-icon-css'
+
+import chartConfig from './config.js'
 import './LineChart.scss'
 
 const mapStateToProps = state => {
@@ -25,49 +28,7 @@ class LineChartClass extends React.Component {
 
   constructor (props) {
     super(props)
-    this.state = {
-      timer: null,
-      counter: 0,
-      datas: {},
-      options: {
-        responsive: true,
-        responsiveAnimationDuration: 0,
-        maintainAspectRatio: false,
-        scaleFontSize: 0,
-        layout: {
-          padding: {
-            left: -10,
-            bottom: -10
-          }
-        },
-        title: {
-          display: true
-        },
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [{
-            ticks: {
-              display: false,
-            },
-            gridLines: {
-              color: "rgba(255, 255, 255, 0)",
-            }
-          }],
-          yAxes: [{
-            ticks: {
-              display: false,
-              min: 0.6185,
-              max: 0.6205
-            },
-            gridLines: {
-              color: "rgba(255, 255, 255, 0)",
-            }
-          }],
-        }
-      }
-    }
+    this.state = chartConfig
     Chart.defaults.global.legend.display = false
   }
 
@@ -112,7 +73,13 @@ class LineChartClass extends React.Component {
   }
 
   async loadData () {
-    let response = await axios.get('http://127.0.0.1:3000/rates/'+this.props.currencyFrom.value+'/'+this.props.currencyTo.value+'/15')
+
+    let response = await api.rates().get(
+      this.props.currencyFrom.value,
+      this.props.currencyTo.value,
+      15
+    )
+
     if (response.status == 200) {
       this.props.setRates(response.data.rates)
       this.setState((prevState, props) => {

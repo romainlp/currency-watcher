@@ -21,3 +21,5 @@ exports.CURRENCIES = [
   { value: 'SGD', label: 'SGD - Singapore dollar' },
   { value: 'TRY', label: 'TRY - Turkish lira' }*/
 ]
+
+exports.API = 'http://127.0.0.1:3000/'

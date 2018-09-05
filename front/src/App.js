@@ -3,6 +3,7 @@ import Chart from './components/Charts/LineChart/LineChart.js'
 import Logo from './components/UI/Logo/Logo.js'
 import CurrencyFrom from './components/CurrencyFrom'
 import CurrencyTo from './components/CurrencyTo'
+import Infos from './components/Infos'
 
 import './assets/scss/base.scss'
 
@@ -23,9 +24,7 @@ class App extends Component {
               </div>
             </div>
             <div className="col-8">
-              <div className="box">
-              <h2>Values</h2>
-              </div>
+              <Infos />
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@ import {
   SET_RATES,
   SET_CURRENCY_FROM,
   SET_CURRENCY_TO } from '../constants/action-types';
-import { CURRENCIES } from '../config';
+import { CURRENCIES } from '../../config';
 
 const initialState = {
   rates: [],

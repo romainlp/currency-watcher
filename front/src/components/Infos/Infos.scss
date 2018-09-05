@@ -1,0 +1,31 @@
+.infos {
+  .currency-group {
+    margin: 0 0 1em 0;
+    overflow: hidden;
+    clear: both;
+
+    .flag-icon {
+      display: inline-block;
+      float: left;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      border-left: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-top-left-radius: 5px;
+      border-bottom-left-radius: 5px;
+      overflow: hidden;
+    }
+    .value {
+      display: inline-block;
+      border-radius: 2px;
+      line-height: 3em;
+      width: 100px;
+      text-align: center;
+      border-top: 1px solid rgba(0, 0, 0, 0.1);
+      border-right: 1px solid rgba(0, 0, 0, 0.1);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+      overflow: hidden;
+    }
+  }
+}
