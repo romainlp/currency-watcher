@@ -2,54 +2,29 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const mongoose = require('mongoose');
 const json = require('koa-json');
-const config = require('./config.js');
-const requestController = require('./controller/request');
+const cors = require('@koa/cors');
+const config = require('./config');
+const ratesController = require('./controllers/rates');
+const fetcher = require('./services/fetcher');
+
 const app = new Koa();
 const router = new Router();
 
-// Pretty JSON
+app.use(cors());
 app.use(json());
+app.use(require('./middlewares/logger.js').logger);
+app.use(require('./middlewares/responseTime.js').responseTime);
 
-// Logger
-app.use(async (ctx, next) => {
-  await next();
-  const rt = ctx.response.get('X-Response-Time');
-  const st = ctx.response.status;
-  console.log(`${ctx.method} - ${st} - ${ctx.url} - ${rt}`);
-});
-
-// x-response-time
-app.use(async (ctx, next) => {
-  const start = Date.now();
-  await next();
-  const ms = Date.now() - start;
-  ctx.set('X-Response-Time', `${ms}ms`);
-});
-
-// Mongoose connection
 mongoose.connect(config.MONGOOSE_URL, { useNewUrlParser: true });
 mongoose.connection.on('error', console.error);
 
-router.get('/', async (ctx, next) => {
-  ctx.body = 'Currency Watcher Fetcher'
-})
+router.get('/', async (ctx, next) => { ctx.body = 'Currency Watcher API' });
+router.get('/rates/:from/:limit*', ratesController.get);
 
-router.get('/fetch/:from/:to', requestController.fetch)
-router.get('/requests', requestController.getRequests)
+fetcher.fetchAll('AUD');
+setInterval(() => { fetcher.fetchAll('AUD') }, config.FETCH_INTERVAL);
 
-// Error handler
-app.use(async (ctx, next) => {
-  try {
-    await next();
-  } catch (err) {
-    // will only respond with JSON
-    ctx.status = err.statusCode || err.status || 500;
-    ctx.body = {
-      message: err.message
-    };
-  }
-})
-
+app.use(require('./middlewares/errorHandler.js').errorHandler);
 app
   .use(router.routes())
   .use(router.allowedMethods())

@@ -5,15 +5,15 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: rgba(0, 0, 0, 0.03);
+  background: #f7fafc;
 }
 
 .box {
-    padding: 20px 40px 40px;
-    background: #fff;
-    border-radius: 2px;
-    -webkit-box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
-    -moz-box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
-    box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
-    margin-top: -30px;
+  padding: 20px 40px 40px;
+  background: #fff;
+  border-radius: 2px;
+  -webkit-box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
+  -moz-box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
+  box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
+  margin-top: -30px;
 }

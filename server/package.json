@@ -4,6 +4,7 @@
   "description": "Koajs application fetching Transferwise datas",
   "main": "index.js",
   "dependencies": {
+    "@koa/cors": "^2.2.2",
     "axios": "^0.18.0",
     "dotenv": "^6.0.0",
     "koa": "^2.5.2",
