@@ -1,33 +1,38 @@
 import React from 'react'
 import Select from 'react-select';
-import Animated from 'react-select/lib/animated';
+import { connect } from "react-redux";
 import { CURRENCIES } from '../../config'
+import { setCurrencyTo } from "../../actions/index"
 
-class CurrencyTo extends React.Component {
+const mapStateToProps = state => {
+  return {
+    currencyTo: state.currencyTo,
+    currencyFrom: state.currencyFrom
+  };
+}
 
-  constructor (props) {
-    super(props)
-    this.state = {
-      selectedOption: null,
-    }
+const mapDispatchToProps = dispatch => {
+  return {
+    setCurrencyTo: currency => dispatch(setCurrencyTo(currency))
   }
+}
+
+class CurrencyToClass extends React.Component {
 
   handleChange (selectedOption) {
-    this.setState({ selectedOption });
+    this.props.setCurrencyTo(selectedOption);
   }
 
   render () {
-    const { selectedOption } = this.state;
+    const currencies = CURRENCIES.filter(currency => currency.value != this.props.currencyFrom.value)
     return (
       <div className="box currency-chooser">
         <h2>...to</h2>
         <div className="form-group">
           <Select
-            isMulti
-            components={Animated()}
-            value={selectedOption}
+            value={currencies[0]}
             onChange={this.handleChange.bind(this)}
-            options={CURRENCIES}
+            options={currencies}
           />
         </div>
       </div>
@@ -35,4 +40,5 @@ class CurrencyTo extends React.Component {
   }
 }
 
+const CurrencyTo = connect(mapStateToProps, mapDispatchToProps)(CurrencyToClass)
 export default CurrencyTo

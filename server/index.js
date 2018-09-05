@@ -21,8 +21,10 @@ mongoose.connection.on('error', console.error);
 router.get('/', async (ctx, next) => { ctx.body = 'Currency Watcher API' });
 router.get('/rates/:from/:to/:limit*', ratesController.get);
 
-fetcher.fetchAll('AUD');
-setInterval(() => { fetcher.fetchAll('AUD') }, config.FETCH_INTERVAL);
+config.CURRENCIES.forEach((currency) => {
+  fetcher.fetchAll(currency);
+  setInterval(() => { fetcher.fetchAll(currency) }, config.FETCH_INTERVAL);
+})
 
 app.use(require('./middlewares/errorHandler.js').errorHandler);
 app

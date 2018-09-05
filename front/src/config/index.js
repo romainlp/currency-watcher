@@ -1,9 +1,9 @@
 exports.CURRENCIES = [
+  { value: 'AUD', label: 'AUD - Australian dollar' },
   { value: 'EUR', label: 'EUR - Euro' },
   { value: 'GBP', label: 'GBP - British Pound' },
   { value: 'USD', label: 'USD - United States dollar' },
-  { value: 'AUD', label: 'AUD - Australian dollar' },
-  { value: 'BGN', label: 'BGN - Bulgarian Iev' },
+  /*{ value: 'BGN', label: 'BGN - Bulgarian Iev' },
   { value: 'BRL', label: 'BRL - Brazilian real' },
   { value: 'CAD', label: 'CAD - Canadian dollar' },
   { value: 'CHF', label: 'CHF - Swiss franc' },
@@ -19,5 +19,5 @@ exports.CURRENCIES = [
   { value: 'RON', label: 'RON - Romanian leu' },
   { value: 'SEK', label: 'SEK - Swedish krona' },
   { value: 'SGD', label: 'SGD - Singapore dollar' },
-  { value: 'TRY', label: 'TRY - Turkish lira' }
+  { value: 'TRY', label: 'TRY - Turkish lira' }*/
 ]

@@ -10,6 +10,8 @@ import './LineChart.scss'
 const mapStateToProps = state => {
   return {
     rates: state.rates,
+    currencyFrom: state.currencyFrom,
+    currencyTo: state.currencyTo
   };
 }
 
@@ -28,7 +30,6 @@ class LineChartClass extends React.Component {
       counter: 0,
       datas: {},
       options: {
-        animation: false,
         responsive: true,
         responsiveAnimationDuration: 0,
         maintainAspectRatio: false,
@@ -71,18 +72,27 @@ class LineChartClass extends React.Component {
   }
 
   componentDidUpdate (prevProps, prevState, snapshot) {
-    const gradientStroke = this.refs.linegraph.chartInstance.ctx.createLinearGradient(0, 0, 800, 800)
+
+    if (this.props.currencyFrom !== prevProps.currencyFrom) {
+      this.loadData()
+    }
+
+    if (this.props.currencyTo !== prevProps.currencyTo) {
+      this.loadData()
+    }
+
+    if (this.props.rates !== prevProps.rates) {
+      const gradientStroke = this.refs.linegraph.chartInstance.ctx.createLinearGradient(0, 0, 800, 800)
       gradientStroke.addColorStop(0, "#80b6f4");
       gradientStroke.addColorStop(1, "#FFF");
 
-    if (this.props.rates !== prevProps.rates) {
       let labels = this.props.rates.map(x => x.date)
       labels = labels.map(x => new moment(x).fromNow())
 
       const datasets = [];
       Object.keys(this.props.rates).forEach((currency) => {
         let dataset = {
-          label: currency,
+          label: this.props.currencyTo.label,
           borderColor: gradientStroke,
           backgroundColor: 'transparent',
           data: this.props.rates.map(x => parseFloat(x.rate).toFixed(4)).reverse()
@@ -102,7 +112,8 @@ class LineChartClass extends React.Component {
   }
 
   async loadData () {
-    let response = await axios.get('http://127.0.0.1:3000/rates/AUD/EUR/15')
+    console.log('http://127.0.0.1:3000/rates/'+this.props.currencyFrom.value+'/'+this.props.currencyTo.value+'/15')
+    let response = await axios.get('http://127.0.0.1:3000/rates/'+this.props.currencyFrom.value+'/'+this.props.currencyTo.value+'/15')
     if (response.status == 200) {
       this.props.setRates(response.data.rates)
       this.setState((prevState, props) => {

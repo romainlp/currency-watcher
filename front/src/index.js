@@ -6,6 +6,8 @@ import App from './App'
 import registerServiceWorker from './registerServiceWorker'
 import { addRequest } from './actions/index'
 
+window.store = store
+
 ReactDOM.render(
     <Provider store={store}>
       <App />
