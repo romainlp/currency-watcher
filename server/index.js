@@ -19,7 +19,7 @@ mongoose.connect(config.MONGOOSE_URL, { useNewUrlParser: true });
 mongoose.connection.on('error', console.error);
 
 router.get('/', async (ctx, next) => { ctx.body = 'Currency Watcher API' });
-router.get('/rates/:from/:limit*', ratesController.get);
+router.get('/rates/:from/:to/:limit*', ratesController.get);
 
 fetcher.fetchAll('AUD');
 setInterval(() => { fetcher.fetchAll('AUD') }, config.FETCH_INTERVAL);

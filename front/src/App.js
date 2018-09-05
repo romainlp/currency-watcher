@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import Chart from './components/Charts/LineChart/LineChart.js'
 import Logo from './components/UI/Logo/Logo.js'
-import Refresh from './components/Refresh'
 import CurrencyFrom from './components/CurrencyFrom'
 import CurrencyTo from './components/CurrencyTo'
 

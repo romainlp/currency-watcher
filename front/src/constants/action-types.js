@@ -1,2 +1,2 @@
-export const ADD_REQUEST = 'ADD_REQUEST';
-export const SET_REQUESTS = 'SET_REQUESTS';
+export const ADD_RATE = 'ADD_RATE';
+export const SET_RATES = 'SET_RATES';

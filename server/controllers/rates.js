@@ -9,13 +9,14 @@ const Rate = require('../models/Rate');
 const get = async (ctx) => {
 
   if (ctx.params.limit === undefined) {
-    ctx.params.limit = config.DEFAULT_NUMBER_RESULTS * config.CURRENCIES.length;
+    ctx.params.limit = config.DEFAULT_NUMBER_RESULTS;
   } else {
-    ctx.params.limit = ctx.params.limit * config.CURRENCIES.length;
+    ctx.params.limit = ctx.params.limit;
   }
 
   const rates = await Rate.find({
-      currencyFrom: ctx.params.from
+      currencyFrom: ctx.params.from,
+      currencyTo: ctx.params.to
     },
     null,
     {
@@ -24,14 +25,10 @@ const get = async (ctx) => {
     }
   );
 
-  const res = {};
-  const label = [];
-  const group = config.CURRENCIES.filter((element) => { return element != ctx.params.from});
-  group.forEach((currency) => {
-    res[currency] = []
-  })
+  const res = [];
+
   rates.forEach((rate) => {
-    res[rate.currencyTo].push({ date: rate.date, rate: rate.rate })
+    res.push({ date: rate.date, rate: rate.rate })
   })
 
   if (!rates) {

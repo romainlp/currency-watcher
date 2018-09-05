@@ -1,15 +1,15 @@
-import { ADD_REQUEST, SET_REQUESTS } from '../constants/action-types';
+import { ADD_RATE, SET_RATES } from '../constants/action-types';
 
 const initialState = {
-  requests: [],
+  rates: [],
 };
 
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_REQUEST:
-      return {...state, requests: [...state.requests, action.payload]};
-    case SET_REQUESTS:
-      return {...state, requests: action.payload};
+    case ADD_RATE:
+      return {...state, rates: [...state.rates, action.payload]};
+    case SET_RATES:
+      return {...state, rates: action.payload};
     default:
       return state;
   }

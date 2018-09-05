@@ -1,20 +1,21 @@
 import React from 'react'
 import { connect } from "react-redux";
 import { Chart, Line } from 'react-chartjs-2'
-import './LineChart.scss'
 import axios from 'axios'
-import { setRequests } from "../../../actions/index"
 import moment from 'moment'
+import { setRates } from "../../../actions/index"
+
+import './LineChart.scss'
 
 const mapStateToProps = state => {
   return {
-    requests: state.requests,
+    rates: state.rates,
   };
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    setRequests: requests => dispatch(setRequests(requests))
+    setRates: rates => dispatch(setRates(rates))
   }
 }
 
@@ -74,25 +75,26 @@ class LineChartClass extends React.Component {
       gradientStroke.addColorStop(0, "#80b6f4");
       gradientStroke.addColorStop(1, "#FFF");
 
-    if (this.props.requests !== prevProps.requests) {
-      const labels = [];
-      const data = [];
-      this.props.requests.forEach(function (request) {
-        labels.push(new moment(request.date).fromNow())
-        data.push(request.datas.transferwiseRate.toFixed(4))
+    if (this.props.rates !== prevProps.rates) {
+      let labels = this.props.rates.map(x => x.date)
+      labels = labels.map(x => new moment(x).fromNow())
+
+      const datasets = [];
+      Object.keys(this.props.rates).forEach((currency) => {
+        let dataset = {
+          label: currency,
+          borderColor: gradientStroke,
+          backgroundColor: 'transparent',
+          data: this.props.rates.map(x => parseFloat(x.rate).toFixed(4)).reverse()
+        }
+        datasets.push(dataset)
       })
+
       this.setState((prevState, props) => {
         return {
           datas: {
             labels: labels.reverse(),
-            datasets: [
-              {
-                label: "AUD",
-                borderColor: gradientStroke,
-                backgroundColor: 'transparent',
-                data: data.reverse()
-              }
-            ]
+            datasets: datasets
           },
         }
       })
@@ -100,9 +102,9 @@ class LineChartClass extends React.Component {
   }
 
   async loadData () {
-    let response = await axios.get('http://127.0.0.1:3000/requests/AUD/EUR/20')
+    let response = await axios.get('http://127.0.0.1:3000/rates/AUD/EUR/15')
     if (response.status == 200) {
-      this.props.setRequests(response.data.requests)
+      this.props.setRates(response.data.rates)
       this.setState((prevState, props) => {
         return {
           options: {

@@ -1,4 +1,4 @@
-import { ADD_REQUEST, SET_REQUESTS } from '../constants/action-types';
+import { ADD_RATE, SET_RATES } from '../constants/action-types';
 
-export const addRequest = request => ({ type: ADD_REQUEST, payload: request });
-export const setRequests = requests => ({ type: SET_REQUESTS, payload: requests });
+export const addRate = rate => ({ type: ADD_RATE, payload: rate });
+export const setRates = rates => ({ type: SET_RATES, payload: rates });
