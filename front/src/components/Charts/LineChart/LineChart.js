@@ -16,7 +16,7 @@ class LineChart extends React.Component {
     this.setState((prevState, props) => {
       let gradientStroke = this.refs.linegraph.chartInstance.ctx.createLinearGradient(0, 0, 800, 800)
       gradientStroke.addColorStop(0, "#80b6f4");
-      gradientStroke.addColorStop(1, "#f49080");
+      gradientStroke.addColorStop(1, "#FFF");
       return {
         datas: {
           labels: ["d", "d", "d", "", "", "", ""],
@@ -24,6 +24,7 @@ class LineChart extends React.Component {
             {
               label: "Australian dollars",
               borderColor: gradientStroke,
+              backgroundColor: 'transparent',
               data: [0.6212, 0.6214, 0.6218, 0.6218, 0.6219, 0.6218, 0.6221]
             }
           ]
@@ -49,11 +50,17 @@ class LineChart extends React.Component {
             xAxes: [{
               ticks: {
                 display: false //this will remove only the label
+              },
+              gridLines: {
+                color: "rgba(255, 255, 255, 0.03)",
               }
             }],
             yAxes: [{
               ticks: {
                 display: false //this will remove only the label
+              },
+              gridLines: {
+                color: "rgba(255, 255, 255, 0.03)",
               }
             }],
           }
@@ -72,7 +79,7 @@ class LineChart extends React.Component {
 
   render () {
     return (
-      <div style={{position: 'relative', height: '100vh', width:'100vw'}}>
+      <div className="chart line-chart" style={{position: 'relative', height: '60vh', width:'100vw'}}>
         <Line ref="linegraph" data={this.state.datas} options={this.state.options} />
       </div>
     )
