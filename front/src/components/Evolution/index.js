@@ -1,99 +1,88 @@
-import React from 'react'
-import { connect } from 'react-redux'
-import FlagIcon from '../FlagIcon'
-import api from '../../api'
+import React from 'react';
+import { connect } from 'react-redux';
+import FlagIcon from '../FlagIcon';
+import api from '../../api';
 
-import './Evolution.scss'
+import './Evolution.scss';
 
-const mapStateToProps = state => {
-  return {
-    rates: state.rates,
-    currencyFrom: state.currencyFrom,
-    currencyTo: state.currencyTo
-  };
-}
+const mapStateToProps = state => ({
+  rates: state.rates,
+  currencyFrom: state.currencyFrom,
+  currencyTo: state.currencyTo,
+});
 
 
 class EvolutionClass extends React.Component {
-
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       day: {},
       week: {},
       month: {},
-      year: {}
-    }
+      year: {},
+    };
   }
 
-  getCountryCodeFromCurrency (currency) {
+  getCountryCodeFromCurrency(currency) {
     switch (currency) {
       case 'AUD':
-        return 'au'
-        break
+        return 'au';
+        break;
       case 'EUR':
-        return 'eu'
-        break
+        return 'eu';
+        break;
       case 'GBP':
-        return 'gb'
-        break
+        return 'gb';
+        break;
       case 'USD':
-        return 'us'
-        break
+        return 'us';
+        break;
       default:
-        return 'eu'
+        return 'eu';
     }
   }
 
-  async componentDidMount () {
+  async componentDidMount() {
     const day = await api.stats().day(
       this.props.currencyFrom.value,
-      this.props.currencyTo.value
-    )
-    this.setState((prevState, props) => {
-      return {
-        day: day.data
-      }
-    })
+      this.props.currencyTo.value,
+    );
+    this.setState((prevState, props) => ({
+      day: day.data,
+    }));
     const week = await api.stats().week(
       this.props.currencyFrom.value,
-      this.props.currencyTo.value
-    )
-    this.setState((prevState, props) => {
-      return {
-        week: week.data
-      }
-    })
+      this.props.currencyTo.value,
+    );
+    this.setState((prevState, props) => ({
+      week: week.data,
+    }));
     const month = await api.stats().month(
       this.props.currencyFrom.value,
-      this.props.currencyTo.value
-    )
-    this.setState((prevState, props) => {
-      return {
-        month: month.data
-      }
-    })
+      this.props.currencyTo.value,
+    );
+    this.setState((prevState, props) => ({
+      month: month.data,
+    }));
     const year = await api.stats().year(
       this.props.currencyFrom.value,
-      this.props.currencyTo.value
-    )
-    this.setState((prevState, props) => {
-      return {
-        year: year.data
-      }
-    })
+      this.props.currencyTo.value,
+    );
+    this.setState((prevState, props) => ({
+      year: year.data,
+    }));
   }
 
-  render () {
-    const to = this.props.currencyTo
-    let dayStat = parseFloat(this.state.day.diff).toFixed(4) 
-    const day = isNaN(dayStat) ? '..' : dayStat
-    let weekStat = parseFloat(this.state.week.diff).toFixed(4)
-    const week = isNaN(weekStat) ? '..' : weekStat
-    let monthStat = parseFloat(this.state.month.diff).toFixed(4)
-    const month = isNaN(monthStat) ? '..' : monthStat
-    let yearStat = parseFloat(this.state.year.diff).toFixed(4)
-    const year = isNaN(yearStat) ? '..' : yearStat
+  render() {
+    const to = this.props.currencyTo;
+    const dayStat = parseFloat(this.state.day.diff).toFixed(4);
+    const day = isNaN(dayStat) ? '..' : dayStat;
+    const weekStat = parseFloat(this.state.week.diff).toFixed(4);
+    const week = isNaN(weekStat) ? '..' : weekStat;
+    const monthStat = parseFloat(this.state.month.diff).toFixed(4);
+    const month = isNaN(monthStat) ? '..' : monthStat;
+    const yearStat = parseFloat(this.state.year.diff).toFixed(4);
+    const year = isNaN(yearStat) ? '..' : yearStat;
     return (
       <div className="box evolution">
         <h2>Evolution</h2>
@@ -114,9 +103,9 @@ class EvolutionClass extends React.Component {
           <div className="value">{year}<span> {to.symbol}</span></div>
         </div>
       </div>
-    )
+    );
   }
 }
 
-const Evolution = connect(mapStateToProps)(EvolutionClass)
-export default Evolution
+const Evolution = connect(mapStateToProps)(EvolutionClass);
+export default Evolution;

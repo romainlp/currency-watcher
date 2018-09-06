@@ -1,14 +1,12 @@
-import React from 'react'
-import './Logo.scss'
+import React from 'react'; // eslint-disable-line no-unused-vars
+import './Logo.scss';
 
-class Logo extends React.Component {
-  render () {
-    return (
-      <div className="logo">
-        <h1>Currency Watcher</h1>
-      </div>
-    )
-  }
+function Logo() {
+  return (
+    <div className="logo">
+      <h1>Currency Watcher</h1>
+    </div>
+  );
 }
 
-export default Logo
+export default Logo;

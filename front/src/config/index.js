@@ -3,7 +3,8 @@ exports.CURRENCIES = [
   { value: 'EUR', label: 'EUR - Euro', symbol: '€' },
   { value: 'GBP', label: 'GBP - British Pound', symbol: '£' },
   { value: 'USD', label: 'USD - United States dollar', symbol: '$' },
-  /*{ value: 'BGN', label: 'BGN - Bulgarian Iev' },
+  /*
+  { value: 'BGN', label: 'BGN - Bulgarian Iev' },
   { value: 'BRL', label: 'BRL - Brazilian real' },
   { value: 'CAD', label: 'CAD - Canadian dollar' },
   { value: 'CHF', label: 'CHF - Swiss franc' },
@@ -19,7 +20,8 @@ exports.CURRENCIES = [
   { value: 'RON', label: 'RON - Romanian leu' },
   { value: 'SEK', label: 'SEK - Swedish krona' },
   { value: 'SGD', label: 'SGD - Singapore dollar' },
-  { value: 'TRY', label: 'TRY - Turkish lira' }*/
-]
+  { value: 'TRY', label: 'TRY - Turkish lira' }
+  */
+];
 
-exports.API = 'http://127.0.0.1:3000/'
+exports.API = 'http://127.0.0.1:3000/';

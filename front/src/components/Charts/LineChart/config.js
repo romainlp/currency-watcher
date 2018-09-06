@@ -9,7 +9,7 @@ export default {
     showAllTooltips: true,
     animation: {
       duration: 1000,
-      easing: 'easeInOutCubic'
+      easing: 'easeInOutCubic',
     },
     responsive: true,
     responsiveAnimationDuration: 500,
@@ -19,14 +19,14 @@ export default {
       padding: {
         left: 40,
         bottom: -10,
-        right: 40
-      }
+        right: 40,
+      },
     },
     title: {
-      display: true
+      display: true,
     },
     legend: {
-      display: false
+      display: false,
     },
     tooltips: {
       backgroundColor: 'rgba(255, 255, 255, 1)',
@@ -37,10 +37,10 @@ export default {
       displayColors: false,
       caretPadding: 10,
       callbacks: {
-          label: function(tooltipItem, data) {
-              return tooltipItem.yLabel
-          }
-      }
+        label(tooltipItem, data) {
+          return tooltipItem.yLabel;
+        },
+      },
     },
     scales: {
       xAxes: [{
@@ -48,19 +48,19 @@ export default {
           display: false,
         },
         gridLines: {
-          color: "rgba(255, 255, 255, 0)",
-        }
+          color: 'rgba(255, 255, 255, 0)',
+        },
       }],
       yAxes: [{
         ticks: {
           display: false,
           min: 0.6185,
-          max: 0.6205
+          max: 0.6205,
         },
         gridLines: {
-          color: "rgba(255, 255, 255, 0)",
-        }
+          color: 'rgba(255, 255, 255, 0)',
+        },
       }],
-    }
-  }
-}
+    },
+  },
+};

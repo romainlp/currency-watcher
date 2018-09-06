@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import Chart from './components/Charts/LineChart/LineChart.js'
-import CurrencyFrom from './components/CurrencyFrom'
-import CurrencyTo from './components/CurrencyTo'
-import Infos from './components/Infos'
-import Evolution from './components/Evolution'
-import Navigation from './components/Navigation'
-import GithubCorner from 'react-github-corner'
+import React, { Component } from 'react';
+import GithubCorner from 'react-github-corner';
+import Chart from './components/Charts/LineChart/LineChart.js';
+import CurrencyFrom from './components/CurrencyFrom';
+import CurrencyTo from './components/CurrencyTo';
+import Infos from './components/Infos';
+import Evolution from './components/Evolution';
+import Navigation from './components/Navigation';
 
-import './assets/scss/base.scss'
+import './assets/scss/base.scss';
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <GithubCorner 
-          style={{'zIndex': 30, 'position': 'absolute', 'right': 0}} 
+        <GithubCorner
+          style={{ zIndex: 30, position: 'absolute', right: 0 }}
           octoColor="#6e90f6"
           bannerColor="#fff"
           href="https://github.com/romainlp/currency-watcher" />
@@ -43,4 +43,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default App;
