@@ -1,7 +1,7 @@
 /**
  * Basic error handler
  */
-const errorHandler = async (ctx, next) => {
+const errorHandler = async(ctx, next) => {
   try {
     await next();
   } catch (err) {
@@ -10,6 +10,6 @@ const errorHandler = async (ctx, next) => {
       message: err.message
     };
   }
-}
+};
 
-module.exports.errorHandler = errorHandler
+module.exports.errorHandler = errorHandler;

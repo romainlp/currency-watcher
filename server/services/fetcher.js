@@ -7,34 +7,33 @@ const Rate = require('../models/Rate');
  * Fetch datas from Transferwise API
  * - We save the request every minutes
  */
-const fetch = async function (from, to) {
-
-  if (config.CURRENCIES.indexOf(from) === -1
-    || config.CURRENCIES.indexOf(to) === -1) {
-    await Promise.reject(new Error('Invalid currency'))
+const fetch = async function(from, to) {
+  if (config.CURRENCIES.indexOf(from) === -1 ||
+    config.CURRENCIES.indexOf(to) === -1) {
+    await Promise.reject(new Error('Invalid currency'));
   }
 
   if (to == from) {
-    await Promise.reject(new Error('Currency have to be different'))
+    await Promise.reject(new Error('Currency have to be different'));
   }
 
   const lastRate = await Rate.findOne(
     {
       currencyFrom: from,
       currencyTo: to
-    }, 
-    {}, 
+    },
+    {},
     {
-      sort: { 'date' : -1 }
-    })
+      sort: { 'date': -1 }
+    });
 
   if (lastRate) {
-    const dateRequest = moment(lastRate.date)
+    const dateRequest = moment(lastRate.date);
     if (moment().isSame(dateRequest, 'minutes')) {
-      return lastRate
+      return lastRate;
     }
   }
-  
+
   let args = {
     'amount': config.CURRENCY_AMOUNT,
     'amountCurrency': 'source',
@@ -43,7 +42,7 @@ const fetch = async function (from, to) {
     'isGuaranteedFixedTarget': false,
     'sourceCurrency': from,
     'targetCurrency': to
-  }
+  };
 
   try {
     const response = await axios.get(
@@ -55,27 +54,27 @@ const fetch = async function (from, to) {
           'X-Authorization-key': config.TRANSFERWISE_KEY
         }
       }
-    )
+    );
     await Rate.create({
       currencyFrom: from,
       currencyTo: to,
       rate: response.data.transferwiseRate
-    })
+    });
   } catch (error) {
-    await Promise.reject(new Error(error))
+    await Promise.reject(new Error(error));
   }
-}
+};
 
 /**
  * Fetch all currency for a given one
  */
-const fetchAll = function (from) {
-  config.CURRENCIES.forEach(async (to) => {
+const fetchAll = function(from) {
+  config.CURRENCIES.forEach(async to => {
     if (from != to) {
-      fetch(from, to).catch((error) => { console.log(error) })
+      fetch(from, to).catch(error => { console.log(error); });
     }
-  })
-}
+  });
+};
 
-module.exports.fetch = fetch
-module.exports.fetchAll = fetchAll
+module.exports.fetch = fetch;
+module.exports.fetchAll = fetchAll;
