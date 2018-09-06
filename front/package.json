@@ -9,6 +9,7 @@
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.4.2",
     "react-flag-icon-css": "^1.0.24",
+    "react-github-corner": "^2.3.0",
     "react-redux": "^5.0.7",
     "react-scripts": "1.1.5",
     "react-select": "^2.0.0",

@@ -6,6 +6,7 @@ export default {
   counter: 0,
   datas: {},
   options: {
+    showAllTooltips: true,
     animation: {
       duration: 1000,
       easing: 'easeInOutCubic'
@@ -16,8 +17,9 @@ export default {
     scaleFontSize: 0,
     layout: {
       padding: {
-        left: -10,
-        bottom: -10
+        left: 40,
+        bottom: -10,
+        right: 40
       }
     },
     title: {
@@ -25,6 +27,20 @@ export default {
     },
     legend: {
       display: false
+    },
+    tooltips: {
+      backgroundColor: 'rgba(255, 255, 255, 1)',
+      titleFontSize: 0,
+      titleMarginBottom: 0,
+      bodyFontSize: 10,
+      bodyFontColor: '#33b1f8',
+      displayColors: false,
+      caretPadding: 10,
+      callbacks: {
+          label: function(tooltipItem, data) {
+              return tooltipItem.yLabel
+          }
+      }
     },
     scales: {
       xAxes: [{

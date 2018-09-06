@@ -20,4 +20,11 @@ body {
 
 div.select {
   margin-bottom: 1.5em;
+  > div {
+    background: transparent;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    > div {
+      padding: 9px 8px;
+    }
+  }
 }

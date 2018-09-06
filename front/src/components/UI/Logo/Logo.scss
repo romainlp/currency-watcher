@@ -1,24 +1,23 @@
 .logo {
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    z-index: 20;
-    h1 {
-        text-transform: uppercase;
-        color: #fff;
-        font-size: 14px;
-        font-weight: normal;
-        letter-spacing: 2px;
-        position: relative;
-        display: block;
-        &:after {
-            content: '';
-            width: 15%;
-            bottom: -10px;
-            height: 2px;
-            display: block;
-            background: #fff;
-            position: absolute;
-        }
+  h1 {
+    text-transform: uppercase;
+    color: #fff;
+    font-size: 14px;
+    font-weight: normal;
+    letter-spacing: 2px;
+    position: relative;
+    display: block;
+    margin: 20px auto 0;
+    display: inline-block;
+    &:after {
+      content: '';
+      width: 20%;
+      bottom: -10px;
+      height: 2px;
+      display: block;
+      background: #fff;
+      position: absolute;
+      left: 0%;
     }
+  }
 }
