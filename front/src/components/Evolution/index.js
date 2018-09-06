@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import FlagIcon from '../FlagIcon'
+import api from '../../api'
 
 import './Evolution.scss'
 
@@ -14,6 +15,16 @@ const mapStateToProps = state => {
 
 
 class EvolutionClass extends React.Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      day: {},
+      week: {},
+      month: {},
+      year: {}
+    }
+  }
 
   getCountryCodeFromCurrency (currency) {
     switch (currency) {
@@ -34,25 +45,73 @@ class EvolutionClass extends React.Component {
     }
   }
 
+  async componentDidMount () {
+    const day = await api.stats().day(
+      this.props.currencyFrom.value,
+      this.props.currencyTo.value
+    )
+    this.setState((prevState, props) => {
+      return {
+        day: day.data
+      }
+    })
+    const week = await api.stats().week(
+      this.props.currencyFrom.value,
+      this.props.currencyTo.value
+    )
+    this.setState((prevState, props) => {
+      return {
+        week: week.data
+      }
+    })
+    const month = await api.stats().month(
+      this.props.currencyFrom.value,
+      this.props.currencyTo.value
+    )
+    this.setState((prevState, props) => {
+      return {
+        month: month.data
+      }
+    })
+    const year = await api.stats().year(
+      this.props.currencyFrom.value,
+      this.props.currencyTo.value
+    )
+    this.setState((prevState, props) => {
+      return {
+        year: year.data
+      }
+    })
+  }
+
   render () {
-    const length = this.props.rates.length
-    const countryCodeFrom = this.getCountryCodeFromCurrency(this.props.currencyFrom.value)
-    const countryCodeTo = this.getCountryCodeFromCurrency(this.props.currencyTo.value)
-    const rate = this.props.rates[0] != undefined ? this.props.rates[0].rate : '..';
+    const to = this.props.currencyTo
+    let dayStat = parseFloat(this.state.day.diff).toFixed(4) 
+    const day = isNaN(dayStat) ? '..' : dayStat
+    let weekStat = parseFloat(this.state.week.diff).toFixed(4)
+    const week = isNaN(weekStat) ? '..' : weekStat
+    let monthStat = parseFloat(this.state.month.diff).toFixed(4)
+    const month = isNaN(monthStat) ? '..' : monthStat
+    let yearStat = parseFloat(this.state.year.diff).toFixed(4)
+    const year = isNaN(yearStat) ? '..' : yearStat
     return (
       <div className="box evolution">
         <h2>Evolution</h2>
         <div className="evolution-group">
-          <span className="label">Last 24h</span>
-          <span className="value">+0.3%</span>
+          <span className="label">Day</span>
+          <div className="value">{day}<span> {to.symbol}</span></div>
         </div>
         <div className="evolution-group">
-          <span className="label">Last week</span>
-          <span className="value">+0.2%</span>
+          <span className="label">Week</span>
+          <div className="value">{week}<span> {to.symbol}</span></div>
         </div>
         <div className="evolution-group">
-          <span className="label">Last month</span>
-          <span className="value">-0.4%</span>
+          <span className="label">Month</span>
+          <div className="value">{month}<span> {to.symbol}</span></div>
+        </div>
+        <div className="evolution-group">
+          <span className="label">Year</span>
+          <div className="value">{year}<span> {to.symbol}</span></div>
         </div>
       </div>
     )

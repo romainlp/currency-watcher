@@ -26,6 +26,10 @@
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
       overflow: hidden;
+      span {
+        font-weight: normal;
+        color: rgba(0, 0, 0, 0.5);
+      }
     }
   }
 }

@@ -1,8 +1,8 @@
 exports.CURRENCIES = [
-  { value: 'AUD', label: 'AUD - Australian dollar' },
-  { value: 'EUR', label: 'EUR - Euro' },
-  { value: 'GBP', label: 'GBP - British Pound' },
-  { value: 'USD', label: 'USD - United States dollar' },
+  { value: 'AUD', label: 'AUD - Australian dollar', symbol: '$' },
+  { value: 'EUR', label: 'EUR - Euro', symbol: '€' },
+  { value: 'GBP', label: 'GBP - British Pound', symbol: '£' },
+  { value: 'USD', label: 'USD - United States dollar', symbol: '$' },
   /*{ value: 'BGN', label: 'BGN - Bulgarian Iev' },
   { value: 'BRL', label: 'BRL - Brazilian real' },
   { value: 'CAD', label: 'CAD - Canadian dollar' },

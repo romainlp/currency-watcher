@@ -10,9 +10,12 @@
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-top-left-radius: 5px;
       border-bottom-left-radius: 5px;
-      line-height: 3em;
-      padding: 0 15px;
-      background: rgba(0, 0, 0, 0.05)
+      line-height: 3.45em;
+      padding: 0 21px;
+      background: rgba(0, 0, 0, 0.05);
+      min-width: 60px;
+      text-align: center;
+      font-size: 14px;
     }
     .value {
       display: inline-block;
@@ -26,6 +29,10 @@
       border-top-right-radius: 5px;
       border-bottom-right-radius: 5px;
       overflow: hidden;
+      span {
+        font-weight: normal;
+        color: rgba(0, 0, 0, 0.5);
+      }
     }
   }
 }

@@ -44,11 +44,11 @@ class InfosClass extends React.Component {
         <h2>Informations</h2>
         <div className="currency-group">
           <FlagIcon code={countryCodeFrom} size='3x'/>
-          <span className="value">1</span>
+          <div className="value">1<span> {this.props.currencyFrom.symbol}</span></div>
         </div>
         <div className="currency-group">
           <FlagIcon code={countryCodeTo} size='3x'/>
-          <span className="value">{rate}</span>
+          <div className="value">{rate}<span> {this.props.currencyTo.symbol}</span></div>
         </div>
       </div>
     )
