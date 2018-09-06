@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import GithubCorner from 'react-github-corner';
-import Chart from './components/Charts/LineChart/LineChart.js';
+import LineChart from './components/Charts/LineChart';
 import CurrencyFrom from './components/CurrencyFrom';
 import CurrencyTo from './components/CurrencyTo';
 import Infos from './components/Infos';
@@ -20,7 +20,7 @@ class App extends Component {
           href="https://github.com/romainlp/currency-watcher" />
         <div className="head">
           <Navigation />
-          <Chart />
+          <LineChart />
         </div>
         <div className="container">
           <div className="row">

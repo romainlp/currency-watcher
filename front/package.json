@@ -5,6 +5,8 @@
   "dependencies": {
     "axios": "^0.18.0",
     "chart.js": "^2.7.2",
+    "moment": "^2.22.2",
+    "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.4.2",
@@ -35,6 +37,7 @@
     "eslint": "^5.5.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-loader": "^2.1.0",
+    "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
     "eslint-plugin-react": "^7.11.1",

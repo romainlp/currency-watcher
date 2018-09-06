@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CURRENCIES } from '../../config';
 import { setCurrencyFrom, setCurrencyTo } from '../../store/actions/index';
@@ -16,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
 class CurrencyFromClass extends React.Component {
   handleChange(selectedOption) {
     this.props.setCurrencyFrom(selectedOption);
-    const currencies = CURRENCIES.filter(currency => currency.value != selectedOption.value);
+    const currencies = CURRENCIES.filter(currency => currency.value !== selectedOption.value);
     this.props.setCurrencyTo(currencies[0]);
   }
 
@@ -37,5 +38,19 @@ class CurrencyFromClass extends React.Component {
   }
 }
 
+CurrencyFromClass.propTypes = {
+  currencyTo: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  currencyFrom: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  setCurrencyTo: PropTypes.func,
+  setCurrencyFrom: PropTypes.func,
+};
 const CurrencyFrom = connect(mapStateToProps, mapDispatchToProps)(CurrencyFromClass);
 export default CurrencyFrom;

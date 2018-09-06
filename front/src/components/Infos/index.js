@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FlagIcon from '../FlagIcon'; // eslint-disable-line no-unused-vars
 
@@ -12,18 +13,19 @@ const mapStateToProps = state => ({
 
 class InfosClass extends React.Component {
   getCountryCodeFromCurrency(currency) {
-    switch (currency) {
-      case 'AUD':
-        return 'au';
-      case 'EUR':
-        return 'eu';
-      case 'GBP':
-        return 'gb';
-      case 'USD':
-        return 'us';
-      default:
-        return 'eu';
+    if (currency === 'AUD') {
+      return 'au';
     }
+    if (currency === 'EUR') {
+      return 'eu';
+    }
+    if (currency === 'GBP') {
+      return 'gb';
+    }
+    if (currency === 'USD') {
+      return 'us';
+    }
+    return 'eu';
   }
 
   render() {
@@ -46,5 +48,20 @@ class InfosClass extends React.Component {
   }
 }
 
+InfosClass.propTypes = {
+  rates: PropTypes.array,
+  currencyTo: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  currencyFrom: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  setCurrencyTo: PropTypes.func,
+  setCurrencyFrom: PropTypes.func,
+};
 const Infos = connect(mapStateToProps)(InfosClass);
 export default Infos;

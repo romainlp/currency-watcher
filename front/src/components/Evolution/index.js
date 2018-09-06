@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import FlagIcon from '../FlagIcon';
+import { CURRENCIES } from '../../config';
 import api from '../../api';
 
 import './Evolution.scss';
@@ -23,89 +24,103 @@ class EvolutionClass extends React.Component {
     };
   }
 
-  getCountryCodeFromCurrency(currency) {
-    switch (currency) {
-      case 'AUD':
-        return 'au';
-        break;
-      case 'EUR':
-        return 'eu';
-        break;
-      case 'GBP':
-        return 'gb';
-        break;
-      case 'USD':
-        return 'us';
-        break;
-      default:
-        return 'eu';
-    }
-  }
-
   async componentDidMount() {
+    const { currencyFrom, currencyTo } = this.props;
+
     const day = await api.stats().day(
-      this.props.currencyFrom.value,
-      this.props.currencyTo.value,
+      currencyFrom.value,
+      currencyTo.value,
     );
-    this.setState((prevState, props) => ({
+    this.setState({
       day: day.data,
-    }));
+    });
     const week = await api.stats().week(
-      this.props.currencyFrom.value,
-      this.props.currencyTo.value,
+      currencyFrom.value,
+      currencyTo.value,
     );
-    this.setState((prevState, props) => ({
+    this.setState({
       week: week.data,
-    }));
+    });
     const month = await api.stats().month(
-      this.props.currencyFrom.value,
-      this.props.currencyTo.value,
+      currencyFrom.value,
+      currencyTo.value,
     );
-    this.setState((prevState, props) => ({
+    this.setState({
       month: month.data,
-    }));
+    });
     const year = await api.stats().year(
-      this.props.currencyFrom.value,
-      this.props.currencyTo.value,
+      currencyFrom.value,
+      currencyTo.value,
     );
-    this.setState((prevState, props) => ({
+    this.setState({
       year: year.data,
-    }));
+    });
   }
 
   render() {
-    const to = this.props.currencyTo;
-    const dayStat = parseFloat(this.state.day.diff).toFixed(4);
-    const day = isNaN(dayStat) ? '..' : dayStat;
-    const weekStat = parseFloat(this.state.week.diff).toFixed(4);
-    const week = isNaN(weekStat) ? '..' : weekStat;
-    const monthStat = parseFloat(this.state.month.diff).toFixed(4);
-    const month = isNaN(monthStat) ? '..' : monthStat;
-    const yearStat = parseFloat(this.state.year.diff).toFixed(4);
-    const year = isNaN(yearStat) ? '..' : yearStat;
+    const { currencyTo } = this.props;
+    const {
+      day,
+      month,
+      week,
+      year,
+    } = this.state;
+    const dayStat = parseFloat(day.diff).toFixed(4);
+    const weekStat = parseFloat(week.diff).toFixed(4);
+    const monthStat = parseFloat(month.diff).toFixed(4);
+    const yearStat = parseFloat(year.diff).toFixed(4);
+
     return (
       <div className="box evolution">
         <h2>Evolution</h2>
         <div className="evolution-group">
           <span className="label">Day</span>
-          <div className="value">{day}<span> {to.symbol}</span></div>
+          <div className="value">
+            {dayStat}
+            <span>
+              {currencyTo.symbol}
+            </span>
+          </div>
         </div>
         <div className="evolution-group">
           <span className="label">Week</span>
-          <div className="value">{week}<span> {to.symbol}</span></div>
+          <div className="value">
+            {weekStat}
+            <span>
+              {currencyTo.symbol}
+            </span>
+          </div>
         </div>
         <div className="evolution-group">
           <span className="label">Month</span>
-          <div className="value">{month}<span> {to.symbol}</span></div>
+          <div className="value">
+            {monthStat}
+            <span>
+              {currencyTo.symbol}
+            </span>
+          </div>
         </div>
         <div className="evolution-group">
           <span className="label">Year</span>
-          <div className="value">{year}<span> {to.symbol}</span></div>
+          <div className="value">
+            {yearStat}
+            <span>
+              {currencyTo.symbol}
+            </span>
+          </div>
         </div>
       </div>
     );
   }
 }
-
+EvolutionClass.propTypes = {
+  currencyTo: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+};
+const defaultCurrency = CURRENCIES[0];
+EvolutionClass.defaultProps = defaultCurrency;
 const Evolution = connect(mapStateToProps)(EvolutionClass);
 export default Evolution;

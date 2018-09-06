@@ -6,10 +6,10 @@ import App from './App'; // eslint-disable-line no-unused-vars
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('root'),
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
 );
 
 registerServiceWorker();

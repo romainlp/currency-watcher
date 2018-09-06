@@ -1,5 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CURRENCIES } from '../../config';
 import { setCurrencyTo } from '../../store/actions/index';
@@ -19,7 +20,8 @@ class CurrencyToClass extends React.Component {
   }
 
   render() {
-    const currencies = CURRENCIES.filter(currency => currency.value != this.props.currencyFrom.value);
+    const currencies = CURRENCIES
+      .filter(currency => currency.value !== this.props.currencyFrom.value);
     return (
       <div className="currency-chooser">
         <div className="form-group">
@@ -35,5 +37,20 @@ class CurrencyToClass extends React.Component {
   }
 }
 
+CurrencyToClass.propTypes = {
+  currencyTo: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  currencyFrom: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  setCurrencyTo: PropTypes.func,
+};
+const defaultCurrency = CURRENCIES[1];
+CurrencyToClass.defaultProps = defaultCurrency;
 const CurrencyTo = connect(mapStateToProps, mapDispatchToProps)(CurrencyToClass);
 export default CurrencyTo;

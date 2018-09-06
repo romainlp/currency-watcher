@@ -37,7 +37,7 @@ export default {
       displayColors: false,
       caretPadding: 10,
       callbacks: {
-        label(tooltipItem, data) {
+        label(tooltipItem) {
           return tooltipItem.yLabel;
         },
       },

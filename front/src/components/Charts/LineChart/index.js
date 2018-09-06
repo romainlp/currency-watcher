@@ -1,13 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Chart, Line } from 'react-chartjs-2';
-import moment from 'moment';
-import FlagIconFactory from 'react-flag-icon-css';
+import Moment from 'moment';
 import { setRates } from '../../../store/actions/index';
 import api from '../../../api';
 
-
-import chartConfig from './config.js';
+import chartConfig from './config';
 import './LineChart.scss';
 
 const mapStateToProps = state => ({
@@ -24,10 +23,11 @@ class LineChartClass extends React.Component {
   constructor(props) {
     super(props);
     this.state = chartConfig;
+    this.lineChart = React.createRef();
     Chart.defaults.global.legend.display = false;
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
+  componentDidUpdate(prevProps) {
     if (this.props.currencyFrom !== prevProps.currencyFrom) {
       this.loadData();
     }
@@ -37,18 +37,15 @@ class LineChartClass extends React.Component {
     }
 
     if (this.props.rates !== prevProps.rates) {
-      const gradientStroke = this.refs.linegraph.chartInstance.ctx.createLinearGradient(0, 0, 800, 800);
-      gradientStroke.addColorStop(0, '#80b6f4');
-      gradientStroke.addColorStop(1, '#FFF');
-
-      let labels = this.props.rates.map(x => x.date);
-      labels = labels.map(x => new moment(x).fromNow());
+      const { rates } = this.props
+      let labels = rates.map(x => x.date);
+      labels = labels.map(x => new Moment(x).fromNow());
 
       const datasets = [];
-      Object.keys(this.props.rates).forEach((currency) => {
+      Object.keys(this.props.rates).forEach(() => {
         const dataset = {
           label: '1',
-          borderColor: gradientStroke,
+          borderColor: 'rgba(255, 255, 255, 0.5)',
           backgroundColor: 'transparent',
           data: this.props.rates.map(x => parseFloat(x.rate).toFixed(4)).reverse(),
           pointBackgroundColor: '#FFF',
@@ -60,12 +57,12 @@ class LineChartClass extends React.Component {
         datasets.push(dataset);
       });
 
-      this.setState((prevState, props) => ({
+      this.setState({
         datas: {
           labels: labels.reverse(),
           datasets,
         },
-      }));
+      });
     }
   }
 
@@ -76,9 +73,9 @@ class LineChartClass extends React.Component {
       15,
     );
 
-    if (response.status == 200) {
+    if (response.status === 200) {
       this.props.setRates(response.data.rates);
-      this.setState((prevState, props) => ({
+      this.setState({
         options: {
           scales: {
             yAxes: [{
@@ -89,7 +86,7 @@ class LineChartClass extends React.Component {
             }],
           },
         },
-      }));
+      });
     }
   }
 
@@ -106,11 +103,27 @@ class LineChartClass extends React.Component {
   render() {
     return (
       <div className="chart line-chart" style={{ position: 'relative', height: '60vh', width: '100vw' }}>
-        <Line ref="linegraph" data={this.state.datas} options={this.state.options} />
+        <Line ref={this.lineChart} data={this.state.datas} options={this.state.options} />
       </div>
     );
   }
 }
 
+LineChartClass.propTypes = {
+  setRates: PropTypes.func,
+  rates: PropTypes.array,
+  currencyTo: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  currencyFrom: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  setCurrencyTo: PropTypes.func,
+  setCurrencyFrom: PropTypes.func,
+};
 const LineChart = connect(mapStateToProps, mapDispatchToProps)(LineChartClass);
 export default LineChart;
