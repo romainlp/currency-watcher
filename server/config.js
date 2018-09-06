@@ -36,4 +36,4 @@ exports.CURRENCIES = [
 
 // Misc
 exports.DEFAULT_NUMBER_RESULTS = process.env.DEFAULT_NUMBER_RESULTS ? process.env.DEFAULT_NUMBER_RESULTS : 15
-exports.FETCH_INTERVAL = process.env.FETCH_INTERVAL ? process.env.FETCH_INTERVAL : 60000 // 1 minutes
+exports.FETCH_INTERVAL = process.env.FETCH_INTERVAL ? process.env.FETCH_INTERVAL : (1000 * 60) * 5 // 5 minutes

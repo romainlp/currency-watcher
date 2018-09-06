@@ -5,6 +5,7 @@ const json = require('koa-json');
 const cors = require('@koa/cors');
 const config = require('./config');
 const ratesController = require('./controllers/rates');
+const statsController = require('./controllers/stats');
 const fetcher = require('./services/fetcher');
 
 const app = new Koa();
@@ -19,7 +20,12 @@ mongoose.connect(config.MONGOOSE_URL, { useNewUrlParser: true });
 mongoose.connection.on('error', console.error);
 
 router.get('/', async (ctx, next) => { ctx.body = 'Currency Watcher API' });
+
 router.get('/rates/:from/:to/:limit*', ratesController.get);
+router.get('/stats/day/:from/:to', statsController.day);
+router.get('/stats/week/:from/:to', statsController.week);
+router.get('/stats/month/:from/:to', statsController.month);
+router.get('/stats/year/:from/:to', statsController.year);
 
 config.CURRENCIES.forEach((currency) => {
   fetcher.fetchAll(currency);
