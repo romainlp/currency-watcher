@@ -55,6 +55,7 @@ const fetch = async function(from, to) {
         }
       }
     );
+
     await Rate.create({
       currencyFrom: from,
       currencyTo: to,
