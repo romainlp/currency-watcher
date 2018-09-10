@@ -36,4 +36,4 @@ app.use(require('./middlewares/errorHandler.js').errorHandler);
 app
   .use(router.routes())
   .use(router.allowedMethods())
-  .listen(3000);
+  .listen(process.env.PORT || 3000);
