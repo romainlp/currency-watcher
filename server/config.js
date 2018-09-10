@@ -7,7 +7,7 @@ exports.CURRENCY_FROM = process.env.CURRENCY_FROM ? process.env.CURRENCY_FROM : 
 exports.CURRENCY_AMOUNT = process.env.CURRENCY_AMOUNT ? process.env.CURRENCY_AMOUNT : '1000';
 
 // Mongoose
-exports.MONGOOSE_URL = process.env.MONGOOSE_URL ? process.env.MONGOOSE_URL : 'mongodb://localhost/currencyWatcher';
+exports.MONGO_URL = process.env.MONGO_URL ? process.env.MONGO_URL : 'mongodb://localhost/currencyWatcher';
 
 // Currencies
 exports.CURRENCIES = ['EUR', 'GBP', 'USD', 'AUD'];

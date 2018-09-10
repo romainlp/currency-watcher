@@ -16,7 +16,7 @@ app.use(json());
 app.use(require('./middlewares/logger.js').logger);
 app.use(require('./middlewares/responseTime.js').responseTime);
 
-mongoose.connect(config.MONGOOSE_URL, { useNewUrlParser: true });
+mongoose.connect(config.MONGO_URL, { useNewUrlParser: true });
 mongoose.connection.on('error', console.error);
 
 router.get('/', async(ctx, next) => { ctx.body = 'Currency Watcher API'; });
