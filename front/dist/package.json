@@ -1,0 +1,10 @@
+{
+ "name": "currency-watcher-front",
+ "version": "1.0.0",
+ "description": "Currency Watcher Frontend",
+ "author": "Romain Le Polh",
+ "private": true,
+ "scripts": {
+   "postinstall": "npm install express"
+ }
+}
