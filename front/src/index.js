@@ -1,9 +1,10 @@
+require('dotenv').config();
 import React from 'react'; // eslint-disable-line no-unused-vars
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'; // eslint-disable-line no-unused-vars
 import store from './store';
 import App from './App'; // eslint-disable-line no-unused-vars
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
   <Provider store={store}>
@@ -12,4 +13,4 @@ ReactDOM.render(
   document.getElementById('root'),
 );
 
-registerServiceWorker();
+// registerServiceWorker();

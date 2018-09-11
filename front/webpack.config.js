@@ -1,5 +1,6 @@
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 const path = require('path');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
   entry: {
@@ -14,6 +15,9 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
   },
+  plugins: [
+    new Dotenv()
+  ],
   node: {
     fs: "empty",
   },

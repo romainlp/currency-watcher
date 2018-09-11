@@ -1,5 +1,3 @@
-require('dotenv').load();
-
 exports.CURRENCIES = [
   { value: 'AUD', label: 'AUD - Australian dollar', symbol: '$' },
   { value: 'EUR', label: 'EUR - Euro', symbol: '€' },
