@@ -18,8 +18,9 @@ export default {
     layout: {
       padding: {
         left: 40,
-        bottom: -10,
+        bottom: 20,
         right: 40,
+        top: 40,
       },
     },
     title: {

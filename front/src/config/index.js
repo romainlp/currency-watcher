@@ -1,3 +1,5 @@
+require('dotenv').load();
+
 exports.CURRENCIES = [
   { value: 'AUD', label: 'AUD - Australian dollar', symbol: '$' },
   { value: 'EUR', label: 'EUR - Euro', symbol: '€' },
@@ -24,4 +26,4 @@ exports.CURRENCIES = [
   */
 ];
 
-exports.API = 'http://127.0.0.1:3000/';
+exports.FRONT_API = process.env.FRONT_API ? process.env.FRONT_API : 'http://127.0.0.1:3000/';

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { API } from '../config';
+import { FRONT_API } from '../config';
 
 export default {
   /**
@@ -7,7 +7,7 @@ export default {
    */
   rates() {
     return {
-      get: (from, to, limit) => axios.get(`${API}rates/${from}/${to}/${limit}`),
+      get: (from, to, limit) => axios.get(`${FRONT_API}rates/${from}/${to}/${limit}`),
     };
   },
   /**
@@ -15,10 +15,10 @@ export default {
    */
   stats() {
     return {
-      day: (from, to) => axios.get(`${API}stats/day/${from}/${to}`),
-      week: (from, to) => axios.get(`${API}stats/week/${from}/${to}`),
-      month: (from, to) => axios.get(`${API}stats/month/${from}/${to}`),
-      year: (from, to) => axios.get(`${API}stats/year/${from}/${to}`),
+      day: (from, to) => axios.get(`${FRONT_API}stats/day/${from}/${to}`),
+      week: (from, to) => axios.get(`${FRONT_API}stats/week/${from}/${to}`),
+      month: (from, to) => axios.get(`${FRONT_API}stats/month/${from}/${to}`),
+      year: (from, to) => axios.get(`${FRONT_API}stats/year/${from}/${to}`),
     };
   },
 };

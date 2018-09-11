@@ -14,6 +14,9 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
   },
+  node: {
+    fs: "empty",
+  },
   module: {
     rules: [
       {
