@@ -1,6 +1,6 @@
 # Currency Watcher
 
-![alt text](http://url/to/img.png)
+![Screenshot](https://github.com/romainlp/currency-watcher/raw/master/assets/screenshot.png)
 
 # Front
 
