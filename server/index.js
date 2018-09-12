@@ -11,7 +11,9 @@ const fetcher = require('./services/fetcher');
 const app = new Koa();
 const router = new Router();
 
-app.use(cors());
+app.use(cors({
+  origin: config.CORS_ORIGIN
+}));
 app.use(json());
 app.use(require('./middlewares/logger.js').logger);
 app.use(require('./middlewares/responseTime.js').responseTime);
