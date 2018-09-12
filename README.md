@@ -4,6 +4,8 @@
 
 # Front
 
+[Demo](http://178.128.67.138:9883/)
+
 Build with ReactJS + ChartJS
 
 # Server
