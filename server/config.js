@@ -15,4 +15,4 @@ exports.CURRENCIES = ['EUR', 'GBP', 'USD', 'AUD'];
 // Misc
 exports.DEFAULT_NUMBER_RESULTS = process.env.DEFAULT_NUMBER_RESULTS ? process.env.DEFAULT_NUMBER_RESULTS : 15;
 exports.FETCH_INTERVAL = process.env.FETCH_INTERVAL ? process.env.FETCH_INTERVAL : (1000 * 60) * 5; // 5 minutes
-exports.CORS_ORIGIN = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN : '178.128.67.138'
+exports.CORS_ORIGIN = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN : 'http://178.128.67.138:9883'
