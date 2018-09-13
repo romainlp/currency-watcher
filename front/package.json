@@ -25,7 +25,7 @@
   },
   "scripts": {
     "start": "webpack-dev-server --open --mode development",
-    "build": "webpack --env.FRONT_API=http://178.128.67.138:42529 ",
+    "build": "webpack",
     "test": "react-scripts test --env=jsdom",
     "lint": "./node_modules/.bin/eslint ./"
   },
