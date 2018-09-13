@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy-front": "git subtree push --prefix front front master",
-    "deploy-server": "git subtree push --prefix server dokku master"
+    "deploy:front": "git subtree push --prefix front front master",
+    "deploy:server": "git subtree push --prefix server dokku master"
   },
   "repository": {
     "type": "git",
