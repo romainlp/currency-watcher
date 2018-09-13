@@ -102,7 +102,7 @@ class LineChartClass extends React.Component {
 
   render() {
     return (
-      <div className="chart line-chart" style={{ position: 'relative', height: '60vh', width: '100vw' }}>
+      <div className="chart line-chart">
         <Line ref={this.lineChart} data={this.state.datas} options={this.state.options} />
       </div>
     );

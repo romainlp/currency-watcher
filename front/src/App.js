@@ -14,7 +14,6 @@ class App extends Component {
     return (
       <div className="App">
         <GithubCorner
-          style={{ zIndex: 30, position: 'absolute', right: 0 }}
           octoColor="#6e90f6"
           bannerColor="#fff"
           href="https://github.com/romainlp/currency-watcher" />

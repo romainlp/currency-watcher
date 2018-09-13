@@ -17,6 +17,15 @@ body {
   box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
   margin-top: -30px;
   margin-bottom: 30px;
+  transition: all .5s ease-in-out;
+  &.loading {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  &.ready {
+    opacity: 1;
+    transform: translateX(0px);
+  }
 }
 
 div.select {
@@ -28,4 +37,10 @@ div.select {
       padding: 9px 8px;
     }
   }
+}
+
+.github-corner {
+  position: fixed;
+  z-index: 30;
+  right: 0;
 }

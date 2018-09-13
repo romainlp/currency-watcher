@@ -21,12 +21,22 @@ class EvolutionClass extends React.Component {
       week: {},
       month: {},
       year: {},
+      loading: true
     };
   }
 
   async componentDidMount() {
-    const { currencyFrom, currencyTo } = this.props;
+    this.loadData();
+    const timer = setInterval(this.loadData.bind(this), (1000 * 60) * 5);
+    this.setState({ timer });
+  }
 
+  componentWillUnmount() {
+    this.clearInterval(this.state.timer);
+  }
+
+  async loadData() {
+    const { currencyFrom, currencyTo } = this.props;
     const day = await api.stats().day(
       currencyFrom.value,
       currencyTo.value,
@@ -55,6 +65,10 @@ class EvolutionClass extends React.Component {
     this.setState({
       year: year.data,
     });
+
+    this.setState({
+      loading: false
+    })
   }
 
   render() {
@@ -65,13 +79,18 @@ class EvolutionClass extends React.Component {
       week,
       year,
     } = this.state;
-    const dayStat = parseFloat(day.diff).toFixed(4);
-    const weekStat = parseFloat(week.diff).toFixed(4);
-    const monthStat = parseFloat(month.diff).toFixed(4);
-    const yearStat = parseFloat(year.diff).toFixed(4);
+    let dayStat = parseFloat(day.diff).toFixed(4);
+    let weekStat = parseFloat(week.diff).toFixed(4);
+    let monthStat = parseFloat(month.diff).toFixed(4);
+    let yearStat = parseFloat(year.diff).toFixed(4);
+
+    dayStat = (dayStat > 0 ? '+' + dayStat : dayStat);
+    weekStat = (weekStat > 0 ? '+' + weekStat : weekStat);
+    monthStat = (monthStat > 0 ? '+' + monthStat : monthStat);
+    yearStat = (yearStat > 0 ? '+' + yearStat : yearStat);
 
     return (
-      <div className="box evolution">
+      <div className={"box evolution " + (this.state.loading ? 'loading' : 'ready')}>
         <h2>Evolution</h2>
         <div className="evolution-group">
           <span className="label">Day</span>
@@ -119,6 +138,12 @@ EvolutionClass.propTypes = {
     label: PropTypes.string,
     symbol: PropTypes.string,
   }),
+  currencyFrom: PropTypes.shape({
+    value: PropTypes.string,
+    label: PropTypes.string,
+    symbol: PropTypes.string,
+  }),
+  loading: PropTypes.bool
 };
 const defaultCurrency = CURRENCIES[0];
 EvolutionClass.defaultProps = defaultCurrency;
