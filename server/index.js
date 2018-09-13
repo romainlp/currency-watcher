@@ -35,6 +35,7 @@ config.CURRENCIES.forEach(currency => {
 });
 
 app.use(require('./middlewares/errorHandler.js').errorHandler);
+console.log('App running on port', process.env.PORT || 3000);
 app
   .use(router.routes())
   .use(router.allowedMethods())
