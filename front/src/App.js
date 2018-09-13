@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import GithubCorner from 'react-github-corner';
 import LineChart from './components/Charts/LineChart';
 import Switcher from './components/Switcher';
-import Infos from './components/Infos';
 import Evolution from './components/Evolution';
 import Navigation from './components/Navigation';
 
@@ -24,13 +23,10 @@ class App extends Component {
           <Switcher />
           <div className="row">
             <div className="col-4">
-              <Infos />
-            </div>
-            <div className="col-4">
-              <Infos />
-            </div>
-            <div className="col-4">
               <Evolution />
+            </div>
+            <div className="col-8">
+              
             </div>
           </div>
         </div>

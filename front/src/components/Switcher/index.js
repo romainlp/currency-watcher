@@ -10,6 +10,7 @@ import { setCurrencyTo, setCurrencyFrom } from '../../store/actions/index';
 import './Switcher.scss';
 
 const mapStateToProps = state => ({
+  rates: state.rates,
   currencyTo: state.currencyTo,
   currencyFrom: state.currencyFrom,
 });
@@ -29,20 +30,26 @@ class SwitcherClass extends React.Component {
   render() {
     const currencyTo = FlagIcon.getCountryCodeFromCurrency(this.props.currencyTo.value);
     const currencyFrom = FlagIcon.getCountryCodeFromCurrency(this.props.currencyFrom.value);
+    const rate = this.props.rates[0] !== undefined ? this.props.rates[0].rate : '..';
     return (
       <div className="row switcher">
         <div className="col-12">
           <div className="container">
             <div className="row">
               <div className="col-5 col-12-sm currency-from">
-                <FlagIcon code={currencyFrom} size='3x'/>
-                <Select
-                  className="select"
-                  value={this.props.currencyFrom}
-                  onChange={this.props.setCurrencyFrom}
-                  options={CURRENCIES
-                    .filter(currency => currency.value !== this.props.currencyFrom.value)}
-                />
+                <div className="select-wrapper">
+                  <FlagIcon code={currencyFrom} size='3x'/>
+                  <Select
+                    className="select"
+                    value={this.props.currencyFrom}
+                    onChange={this.props.setCurrencyFrom}
+                    options={CURRENCIES
+                      .filter(currency => currency.value !== this.props.currencyFrom.value)}
+                  />
+                </div>
+                <div className="currency-value">
+                  <p className="value">1<span> {this.props.currencyFrom.symbol}</span></p>
+                </div>
               </div>
               <div className="col-2 col-12-sm invert" title="Invert selection">
                 <button onClick={this.invertCurrencies}>
@@ -50,14 +57,19 @@ class SwitcherClass extends React.Component {
                 </button>
               </div>
               <div className="col-5 col-12-sm currency-to">
-                <FlagIcon code={currencyTo} size='3x'/>
-                <Select
-                  className="select"
-                  value={this.props.currencyTo}
-                  onChange={this.props.setCurrencyTo}
-                  options={CURRENCIES
-                    .filter(currency => currency.value !== this.props.currencyTo.value)}
-                />
+                <div className="select-wrapper">
+                  <FlagIcon code={currencyTo} size='3x'/>
+                  <Select
+                    className="select"
+                    value={this.props.currencyTo}
+                    onChange={this.props.setCurrencyTo}
+                    options={CURRENCIES
+                      .filter(currency => currency.value !== this.props.currencyTo.value)}
+                  />
+                </div>
+                <div className="currency-value">
+                  <p className="value">{rate}<span> {this.props.currencyTo.symbol}</span></p>
+                </div>
               </div>
             </div>
           </div>
@@ -68,6 +80,7 @@ class SwitcherClass extends React.Component {
 }
 
 SwitcherClass.propTypes = {
+  rates: PropTypes.array,
   currencyTo: PropTypes.shape({
     value: PropTypes.string,
     label: PropTypes.string,

@@ -7,12 +7,35 @@
     -webkit-box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
     -moz-box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
     box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
-    padding-top: 10px;
+    padding-top: 15px;
     padding-bottom: 10px;
     .container {
       .currency-from,
       .currency-to {
-        height: 56px;
+        .select-wrapper {
+          height: 56px;
+          overflow: visible;
+        }
+        .currency-value {
+          padding: 40px 0 0;
+          text-indent: center;
+          position: relative;
+          &:before {
+            content: '';
+            width: 2px;
+            position: absolute;
+            height: 20px;
+            top: 10px;
+            background: rgba(0, 0, 0, 0.1);
+            left: calc(50% - 1px);
+          }
+          p {
+            margin: 0;
+            text-align: center;
+            font-weight: 500;
+            line-height: 1em;
+          }
+        }
       }
       .flag-icon {
         display: block;

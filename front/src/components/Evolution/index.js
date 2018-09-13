@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { CURRENCIES } from '../../config';
 import api from '../../api';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowCircleUp, faArrowCircleDown } from '@fortawesome/free-solid-svg-icons';
 
 import './Evolution.scss';
 
@@ -89,6 +91,11 @@ class EvolutionClass extends React.Component {
     monthStat = (monthStat > 0 ? '+' + monthStat : monthStat);
     yearStat = (yearStat > 0 ? '+' + yearStat : yearStat);
 
+    const iconDay = (dayStat > 0 ? faArrowCircleUp : faArrowCircleDown);
+    const iconWeek = (weekStat > 0 ? faArrowCircleUp : faArrowCircleDown);
+    const iconMonth = (monthStat > 0 ? faArrowCircleUp : faArrowCircleDown);
+    const iconYear = (yearStat > 0 ? faArrowCircleUp : faArrowCircleDown);
+
     return (
       <div className={"box evolution " + (this.state.loading ? 'loading' : 'ready')}>
         <h2>Evolution</h2>
@@ -98,6 +105,7 @@ class EvolutionClass extends React.Component {
             {dayStat}
             <span>
               {currencyTo.symbol}
+              <FontAwesomeIcon icon={iconDay} />
             </span>
           </div>
         </div>
@@ -107,6 +115,7 @@ class EvolutionClass extends React.Component {
             {weekStat}
             <span>
               {currencyTo.symbol}
+              <FontAwesomeIcon icon={iconWeek} />
             </span>
           </div>
         </div>
@@ -116,6 +125,7 @@ class EvolutionClass extends React.Component {
             {monthStat}
             <span>
               {currencyTo.symbol}
+              <FontAwesomeIcon icon={iconMonth} />
             </span>
           </div>
         </div>
@@ -125,6 +135,7 @@ class EvolutionClass extends React.Component {
             {yearStat}
             <span>
               {currencyTo.symbol}
+              <FontAwesomeIcon icon={iconYear} />
             </span>
           </div>
         </div>
