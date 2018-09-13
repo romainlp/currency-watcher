@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import GithubCorner from 'react-github-corner';
 import LineChart from './components/Charts/LineChart';
-import CurrencyFrom from './components/CurrencyFrom';
-import CurrencyTo from './components/CurrencyTo';
+import Switcher from './components/Switcher';
 import Infos from './components/Infos';
 import Evolution from './components/Evolution';
 import Navigation from './components/Navigation';
@@ -22,12 +21,10 @@ class App extends Component {
           <LineChart />
         </div>
         <div className="container">
+          <Switcher />
           <div className="row">
             <div className="col-4">
-              <div className="box">
-                <CurrencyFrom />
-                <CurrencyTo />
-              </div>
+              <Infos />
             </div>
             <div className="col-4">
               <Infos />

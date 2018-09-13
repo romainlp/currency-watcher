@@ -15,9 +15,10 @@ body {
   -webkit-box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
   -moz-box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
   box-shadow: 0px 0px 5px 0px rgba(71,71,71,0.10);
-  margin-top: -30px;
+  //margin-top: -30px;
   margin-bottom: 30px;
   transition: all .5s ease-in-out;
+  position: relative;
   &.loading {
     opacity: 0;
     transform: translateX(30px);
@@ -29,7 +30,8 @@ body {
 }
 
 div.select {
-  margin-bottom: 1.5em;
+  margin-bottom: 0;
+  background: #ffffff;
   > div {
     background: transparent;
     border: 1px solid rgba(0, 0, 0, 0.1);
@@ -43,4 +45,13 @@ div.select {
   position: fixed;
   z-index: 30;
   right: 0;
+}
+
+.currency-chooser {
+  &.box {
+    padding: 20px;
+  }
+  .flag-icon {
+
+  }
 }
