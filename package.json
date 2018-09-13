@@ -1,0 +1,26 @@
+{
+  "name": "currency-watcher",
+  "version": "1.0.0",
+  "description": "A ReactJS / Koa application to track Transferwise rates, just for testing.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy-front": "git subtree push --prefix front front master",
+    "deploy-server": "git subtree push --prefix server dokku master"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/romainlp/currency-watcher.git"
+  },
+  "keywords": [
+    "koajs",
+    "reactjs",
+    "transferwise"
+  ],
+  "author": "Romain Le Polh <romainlepolh@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/romainlp/currency-watcher/issues"
+  },
+  "homepage": "https://github.com/romainlp/currency-watcher#readme"
+}
