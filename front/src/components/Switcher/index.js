@@ -44,7 +44,7 @@ class SwitcherClass extends React.Component {
                     value={this.props.currencyFrom}
                     onChange={this.props.setCurrencyFrom}
                     options={CURRENCIES
-                      .filter(currency => currency.value !== this.props.currencyFrom.value)}
+                      .filter(currency => currency.value !== this.props.currencyTo.value)}
                   />
                 </div>
                 <div className="currency-value">
@@ -64,7 +64,7 @@ class SwitcherClass extends React.Component {
                     value={this.props.currencyTo}
                     onChange={this.props.setCurrencyTo}
                     options={CURRENCIES
-                      .filter(currency => currency.value !== this.props.currencyTo.value)}
+                      .filter(currency => currency.value !== this.props.currencyFrom.value)}
                   />
                 </div>
                 <div className="currency-value">
