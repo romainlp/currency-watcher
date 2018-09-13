@@ -27,6 +27,12 @@ class EvolutionClass extends React.Component {
     };
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.currencyFrom !== prevProps.currencyFrom) {
+      this.loadData();
+    }
+  }
+
   async componentDidMount() {
     this.loadData();
     const timer = setInterval(this.loadData.bind(this), (1000 * 60) * 5);
