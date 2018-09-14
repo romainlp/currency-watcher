@@ -32,8 +32,7 @@
     "start": "webpack-dev-server --open --mode development",
     "build": "webpack",
     "test": "react-scripts test --env=jsdom",
-    "lint": "./node_modules/.bin/eslint ./",
-    "postinstall": "webpack"
+    "lint": "./node_modules/.bin/eslint ./"
   },
   "eslintConfig": {
     "env": {
