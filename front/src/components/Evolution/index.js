@@ -102,6 +102,11 @@ class EvolutionClass extends React.Component {
     const iconMonth = (monthStat > 0 ? faArrowCircleUp : faArrowCircleDown);
     const iconYear = (yearStat > 0 ? faArrowCircleUp : faArrowCircleDown);
 
+    const dayClassName =  (dayStat > 0 ? 'pos' : 'neg');
+    const weekClassName =  (weekStat > 0 ? 'pos' : 'neg');
+    const monthClassName =  (monthStat > 0 ? 'pos' : 'neg');
+    const yearClassName =  (yearStat > 0 ? 'pos' : 'neg');
+
     return (
       <div className={"box evolution " + (this.state.loading ? 'loading' : 'ready')}>
         <h2>Evolution</h2>
@@ -109,40 +114,48 @@ class EvolutionClass extends React.Component {
           <span className="label">Day</span>
           <div className="value">
             {dayStat}
-            <span>
+            <div>
               {currencyTo.symbol}
-              <FontAwesomeIcon icon={iconDay} />
-            </span>
+              <span className={dayClassName}>
+                <FontAwesomeIcon icon={iconDay} />
+              </span>
+            </div>
           </div>
         </div>
         <div className="evolution-group">
           <span className="label">Week</span>
           <div className="value">
             {weekStat}
-            <span>
+            <div>
               {currencyTo.symbol}
-              <FontAwesomeIcon icon={iconWeek} />
-            </span>
+              <span className={weekClassName}>
+                <FontAwesomeIcon icon={iconWeek} />
+              </span>
+            </div>
           </div>
         </div>
         <div className="evolution-group">
           <span className="label">Month</span>
           <div className="value">
             {monthStat}
-            <span>
+            <div>
               {currencyTo.symbol}
-              <FontAwesomeIcon icon={iconMonth} />
-            </span>
+              <span className={monthClassName}>
+                <FontAwesomeIcon icon={iconMonth} />
+              </span>
+            </div>
           </div>
         </div>
         <div className="evolution-group">
           <span className="label">Year</span>
           <div className="value">
             {yearStat}
-            <span>
+            <div>
               {currencyTo.symbol}
-              <FontAwesomeIcon icon={iconYear} />
-            </span>
+              <span className={yearClassName}>
+                <FontAwesomeIcon icon={iconYear} />
+              </span>
+            </div>
           </div>
         </div>
       </div>

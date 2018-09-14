@@ -78,6 +78,9 @@
         &:active {
           border: 2px solid #2687FF;
         }
+        &:hover {
+          border-color: hsl(0,0%,70%);
+        }
       }
     }
   }
