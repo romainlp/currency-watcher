@@ -27,6 +27,7 @@ router.get('/', async(ctx, next) => {
   };
 });
 
+router.get('/rates/day/:from/:to', ratesController.day);
 router.get('/rates/week/:from/:to', ratesController.week);
 router.get('/rates/month/:from/:to', ratesController.month);
 router.get('/rates/year/:from/:to', ratesController.year);

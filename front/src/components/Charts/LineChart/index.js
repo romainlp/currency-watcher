@@ -53,21 +53,17 @@ class LineChartClass extends React.Component {
       let labels = rates.map(x => x.date);
       labels = labels.map(x => new Moment(x).fromNow());
 
-      const datasets = [];
-      Object.keys(this.props.rates).forEach(() => {
-        const dataset = {
-          label: '1',
-          borderColor: 'rgba(255, 255, 255, 0.5)',
-          backgroundColor: 'transparent',
-          data: this.props.rates.map(x => parseFloat(x.rate).toFixed(4)).reverse(),
-          pointBackgroundColor: '#FFF',
-          pointBorderColor: '#FFF',
-          pointBorderWidth: 6,
-          pointHoverBackgroundColor: '#FFF',
-          pointHoverBorderColor: '#FFF',
-        };
-        datasets.push(dataset);
-      });
+      const datasets = [{
+        label: '1',
+        borderColor: 'rgba(255, 255, 255, 0.5)',
+        backgroundColor: 'transparent',
+        data: this.props.rates.map(x => parseFloat(x.rate).toFixed(5)).reverse(),
+        pointBackgroundColor: '#FFF',
+        pointBorderColor: '#FFF',
+        pointBorderWidth: 6,
+        pointHoverBackgroundColor: '#FFF',
+        pointHoverBorderColor: '#FFF',
+      }];
 
       this.setState({
         datas: {
@@ -80,35 +76,31 @@ class LineChartClass extends React.Component {
 
   loadData = async (type) => {
     let response = undefined;
-    if (type === undefined) {
-      response = await api.rates().get(
+    if (type === undefined || type === 'day') {
+      response = await api.rates().day(
         this.props.currencyFrom.value,
-        this.props.currencyTo.value,
-        15,
+        this.props.currencyTo.value
       );
     }
 
     if (type === 'week') {
       response = await api.rates().week(
         this.props.currencyFrom.value,
-        this.props.currencyTo.value,
-        15,
+        this.props.currencyTo.value
       );
     }
 
     if (type === 'month') {
       response = await api.rates().month(
         this.props.currencyFrom.value,
-        this.props.currencyTo.value,
-        15,
+        this.props.currencyTo.value
       );
     }
 
     if (type === 'year') {
       response = await api.rates().month(
         this.props.currencyFrom.value,
-        this.props.currencyTo.value,
-        15,
+        this.props.currencyTo.value
       );
     }
 
@@ -135,9 +127,10 @@ class LineChartClass extends React.Component {
   }
 
   render() {
+    const { datas, options } = this.state;
     return (
       <div className="chart line-chart">
-        <Line ref={this.lineChart} data={this.state.datas} options={this.state.options} />
+        <Line ref={this.lineChart} data={datas} options={options} />
       </div>
     );
   }

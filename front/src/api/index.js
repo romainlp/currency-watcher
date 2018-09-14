@@ -8,6 +8,7 @@ export default {
   rates() {
     return {
       get: (from, to, limit) => axios.get(`${FRONT_API}rates/${from}/${to}/${limit}`),
+      day: (from, to) => axios.get(`${FRONT_API}rates/day/${from}/${to}`),
       week: (from, to) => axios.get(`${FRONT_API}rates/week/${from}/${to}`),
       month: (from, to) => axios.get(`${FRONT_API}rates/month/${from}/${to}`),
       year: (from, to) => axios.get(`${FRONT_API}rates/year/${from}/${to}`),

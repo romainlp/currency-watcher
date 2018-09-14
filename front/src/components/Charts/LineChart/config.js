@@ -31,17 +31,18 @@ export default {
     },
     tooltips: {
       backgroundColor: 'rgba(255, 255, 255, 1)',
-      titleFontSize: 0,
-      titleMarginBottom: 0,
+      titleFontSize: 12,
+      titleMarginBottom: 5,
+      titleFontColor: '#33b1f8',
       bodyFontSize: 10,
       bodyFontColor: '#33b1f8',
       displayColors: false,
       caretPadding: 10,
-      callbacks: {
+      /*callbacks: {
         label(tooltipItem) {
           return tooltipItem.yLabel;
         },
-      },
+      },*/
     },
     scales: {
       xAxes: [{

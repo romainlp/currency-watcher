@@ -42,6 +42,45 @@ const get = async ctx => {
   }
 };
 
+const day = async ctx => {
+  const startDate = moment.utc().format('YYYY-MM-DD');
+  const rates = await Rate.find(
+    {
+      currencyFrom: ctx.params.from,
+      currencyTo: ctx.params.to,
+      date: {
+        $gte: startDate
+      }
+    },
+    null,
+    {
+      sort: { 'date': -1 }
+    }
+  );
+
+  if (!rates) {
+    throw new Error('Threre was an error retrieving rates.');
+  } else {
+    const res = [];
+    const wrappedByHours = {};
+    rates.forEach(rate => {
+      let key = moment.utc(rate.date).format('H');
+      if (wrappedByHours[key] === undefined) {
+        wrappedByHours[key] = { key: key, date: rate.date, rate: rate.rate }
+      }
+    });
+  
+    let values = rates.map(x => x.rate);
+    let min = values.reduce((min, p) => p < min ? p : min, values[0]);
+    let max = values.reduce((max, p) => p > max ? p : max, values[0]);
+    ctx.body = {
+      min: min,
+      max: max,
+      rates: Object.values(wrappedByHours).reverse()
+    };
+  }
+}
+
 const week = async ctx => {
   const startDate = moment.utc().startOf('week').format('YYYY-MM-DD');
   const rates = await Rate.find(
@@ -154,6 +193,7 @@ const year = async ctx => {
 }
 
 module.exports.get = get;
+module.exports.day = day;
 module.exports.week = week;
 module.exports.month = month;
 module.exports.year = year;
