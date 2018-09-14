@@ -27,6 +27,13 @@ class LineChartClass extends React.Component {
     Chart.defaults.global.legend.display = false;
   }
 
+  componentDidMount() {
+    this._isMounted = true;
+    this.loadData();
+    const intervalId = setInterval(this.loadData.bind(this), (1000 * 60) * 5);
+    this.setState({ intervalId: intervalId });
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.currencyFrom !== prevProps.currencyFrom) {
       this.loadData();
@@ -66,14 +73,14 @@ class LineChartClass extends React.Component {
     }
   }
 
-  async loadData() {
+  loadData = async () => {
     const response = await api.rates().get(
       this.props.currencyFrom.value,
       this.props.currencyTo.value,
       15,
     );
 
-    if (response.status === 200) {
+    if (response.status === 200 && this._isMounted) {
       this.props.setRates(response.data.rates);
       this.setState({
         options: {
@@ -90,14 +97,9 @@ class LineChartClass extends React.Component {
     }
   }
 
-  componentDidMount() {
-    this.loadData();
-    const timer = setInterval(this.loadData.bind(this), (1000 * 60) * 5);
-    this.setState({ timer });
-  }
-
   componentWillUnmount() {
-    clearInterval(this.state.timer);
+    clearInterval(this.state.intervalId);
+    this._isMounted = false;
   }
 
   render() {

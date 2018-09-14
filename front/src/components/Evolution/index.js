@@ -33,50 +33,45 @@ class EvolutionClass extends React.Component {
     }
   }
 
-  async componentDidMount() {
+  componentDidMount() {
+    this._isMounted = true;
     this.loadData();
-    const timer = setInterval(this.loadData.bind(this), (1000 * 60) * 5);
-    this.setState({ timer });
+    let intervalId = setInterval(this.loadData, 500 /*(1000 * 60) * 5*/);
+    this.setState({ intervalId: intervalId });
   }
 
   componentWillUnmount() {
-    this.clearInterval(this.state.timer);
+    this._isMounted = false;
+    clearInterval(this.state.intervalId);
   }
 
-  async loadData() {
+  loadData = async () => {
     const { currencyFrom, currencyTo } = this.props;
     const day = await api.stats().day(
       currencyFrom.value,
       currencyTo.value,
     );
-    this.setState({
-      day: day.data,
-    });
     const week = await api.stats().week(
       currencyFrom.value,
       currencyTo.value,
     );
-    this.setState({
-      week: week.data,
-    });
     const month = await api.stats().month(
       currencyFrom.value,
       currencyTo.value,
     );
-    this.setState({
-      month: month.data,
-    });
     const year = await api.stats().year(
       currencyFrom.value,
       currencyTo.value,
     );
-    this.setState({
-      year: year.data,
-    });
-
-    this.setState({
-      loading: false
-    })
+    if (this._isMounted) {
+      this.setState({
+        month: month.data,
+        week: week.data,
+        day: day.data,
+        year: year.data,
+        loading: false,
+      })
+    }
   }
 
   render() {
@@ -87,6 +82,7 @@ class EvolutionClass extends React.Component {
       week,
       year,
     } = this.state;
+
     let dayStat = parseFloat(day.diff).toFixed(4);
     let weekStat = parseFloat(week.diff).toFixed(4);
     let monthStat = parseFloat(month.diff).toFixed(4);
