@@ -13,6 +13,7 @@ const mapStateToProps = state => ({
   rates: state.rates,
   currencyFrom: state.currencyFrom,
   currencyTo: state.currencyTo,
+  graph: state.graph,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -41,6 +42,10 @@ class LineChartClass extends React.Component {
 
     if (this.props.currencyTo !== prevProps.currencyTo) {
       this.loadData();
+    }
+
+    if (this.props.graph !== prevProps.graph) {
+      console.log('Ohhhh, graph should call new datas now');
     }
 
     if (this.props.rates !== prevProps.rates) {
@@ -114,6 +119,7 @@ class LineChartClass extends React.Component {
 LineChartClass.propTypes = {
   setRates: PropTypes.func,
   rates: PropTypes.array,
+  graph: PropTypes.string,
   currencyTo: PropTypes.shape({
     value: PropTypes.string,
     label: PropTypes.string,

@@ -4,6 +4,7 @@ import LineChart from './components/Charts/LineChart';
 import Switcher from './components/Switcher';
 import Evolution from './components/Evolution';
 import Navigation from './components/Navigation';
+import Settings from './components/Settings';
 
 import './assets/scss/base.scss';
 
@@ -25,8 +26,8 @@ class App extends Component {
             <div className="col-4">
               <Evolution />
             </div>
-            <div className="col-8">
-              
+            <div className="col-4">
+              <Settings />
             </div>
           </div>
         </div>

@@ -1,0 +1,16 @@
+.settings {
+  .form-group {
+    padding: 0 0 20px;
+    overflow: auto;
+    label {
+      display: block;
+      height: 24px;
+      line-height: 24px;
+      float: left;
+    }
+    > div {
+      display: block;
+      float: right;
+    }
+  }
+}
