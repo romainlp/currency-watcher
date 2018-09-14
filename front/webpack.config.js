@@ -3,8 +3,7 @@ const path = require('path');
 const Dotenv = require('dotenv-webpack');
 
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./src/index.html",
-  filename: "./index.html"
+  template: './src/index.html'
 });
 
 module.exports = {
@@ -51,10 +50,7 @@ module.exports = {
       },
       {
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: 'file-loader',
-        options: {
-            outputPath: 'files/',
-        },
+        loader: 'file-loader'
       },
       {
         test: /\.(scss|css)$/,
