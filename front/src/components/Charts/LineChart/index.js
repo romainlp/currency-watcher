@@ -37,15 +37,15 @@ class LineChartClass extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.currencyFrom !== prevProps.currencyFrom) {
-      this.loadData();
+      this.loadData(this.props.graph);
     }
 
     if (this.props.currencyTo !== prevProps.currencyTo) {
-      this.loadData();
+      this.loadData(this.props.graph);
     }
 
     if (this.props.graph !== prevProps.graph) {
-      console.log('Ohhhh, graph should call new datas now');
+      this.loadData(this.props.graph);
     }
 
     if (this.props.rates !== prevProps.rates) {
@@ -78,12 +78,39 @@ class LineChartClass extends React.Component {
     }
   }
 
-  loadData = async () => {
-    const response = await api.rates().get(
-      this.props.currencyFrom.value,
-      this.props.currencyTo.value,
-      15,
-    );
+  loadData = async (type) => {
+    let response = undefined;
+    if (type === undefined) {
+      response = await api.rates().get(
+        this.props.currencyFrom.value,
+        this.props.currencyTo.value,
+        15,
+      );
+    }
+
+    if (type === 'week') {
+      response = await api.rates().week(
+        this.props.currencyFrom.value,
+        this.props.currencyTo.value,
+        15,
+      );
+    }
+
+    if (type === 'month') {
+      response = await api.rates().month(
+        this.props.currencyFrom.value,
+        this.props.currencyTo.value,
+        15,
+      );
+    }
+
+    if (type === 'year') {
+      response = await api.rates().month(
+        this.props.currencyFrom.value,
+        this.props.currencyTo.value,
+        15,
+      );
+    }
 
     if (response.status === 200 && this._isMounted) {
       this.props.setRates(response.data.rates);

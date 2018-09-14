@@ -3,6 +3,41 @@ const moment = require('moment');
 const config = require('../config');
 const Rate = require('../models/Rate');
 
+const purge = async function(from, to) {
+  const dayToPurge = 60;
+  for (let i = 1; i < dayToPurge; i++) {
+    let startDate = moment.utc().add(-i, 'days').format('YYYY-MM-DD');
+    let endDate = moment.utc().add(-(i + 1), 'days').format('YYYY-MM-DD');
+    const rates = await Rate.find(
+      {
+        currencyFrom: from,
+        currencyTo: to,
+        date: {
+          $lt: startDate,
+          $gte: endDate,
+        }
+      },
+      null,
+      {
+        sort: { 'date': -1 }
+      }
+    );
+
+    if (rates && rates.length > 1) {
+      let i = 0;
+      let total = 0;
+      rates.forEach(rate => {
+        if (i < rates.length - 1) {
+          total += 1;
+          rate.remove();
+        }
+        i++;
+      });
+      console.log('Delete', from, to, total);
+    }
+  }
+}
+
 /**
  * Fetch datas from Transferwise API
  * - We save the request every minutes
@@ -73,6 +108,7 @@ const fetchAll = function(from) {
   config.CURRENCIES.forEach(async to => {
     if (from != to) {
       fetch(from, to).catch(error => { console.log(error); });
+      purge(from, to).catch(error => { console.log(error); });
     }
   });
 };

@@ -36,7 +36,7 @@ class EvolutionClass extends React.Component {
   componentDidMount() {
     this._isMounted = true;
     this.loadData();
-    let intervalId = setInterval(this.loadData, 500 /*(1000 * 60) * 5*/);
+    let intervalId = setInterval(this.loadData, (1000 * 60) * 5);
     this.setState({ intervalId: intervalId });
   }
 

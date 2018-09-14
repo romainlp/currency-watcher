@@ -29,7 +29,6 @@ class LineChartClass extends React.Component {
 
   // eslint-disable-next-line no-unused-vars
   handleChange = (checked, e, id) => {
-    console.log('SET GRAPH', id);
     if (this.state[id] === true) {
       return;
     }

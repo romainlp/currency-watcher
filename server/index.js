@@ -27,7 +27,11 @@ router.get('/', async(ctx, next) => {
   };
 });
 
+router.get('/rates/week/:from/:to', ratesController.week);
+router.get('/rates/month/:from/:to', ratesController.month);
+router.get('/rates/year/:from/:to', ratesController.year);
 router.get('/rates/:from/:to/:limit*', ratesController.get);
+
 router.get('/stats/day/:from/:to', statsController.day);
 router.get('/stats/week/:from/:to', statsController.week);
 router.get('/stats/month/:from/:to', statsController.month);
