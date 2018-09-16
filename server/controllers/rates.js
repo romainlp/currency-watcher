@@ -83,13 +83,14 @@ const day = async ctx => {
 
 const week = async ctx => {
   const startDate = moment.utc().startOf('week').format('YYYY-MM-DD');
+  const endDate = moment.utc().format('YYYY-MM-DD');
   const rates = await Rate.find(
     {
       currencyFrom: ctx.params.from,
       currencyTo: ctx.params.to,
       date: {
         $gte: startDate,
-        $lt: moment.utc().format('YYYY-MM-DD'),
+        $lt: endDate,
       }
     },
     null,
@@ -120,13 +121,16 @@ const week = async ctx => {
 
 const month = async ctx => {
   const startDate = moment.utc().startOf('month').format('YYYY-MM-DD');
+  const endDate = moment.utc().format('YYYY-MM-DD');
+
+  console.log(startDate, endDate);
   const rates = await Rate.find(
     {
       currencyFrom: ctx.params.from,
       currencyTo: ctx.params.to,
       date: {
         $gte: startDate,
-        $lt: moment.utc().format('YYYY-MM-DD'),
+        $lt: endDate,
       }
     },
     null,

@@ -33,7 +33,6 @@ const purge = async function(from, to) {
         }
         i++;
       });
-      console.log('Delete', from, to, total);
     }
   }
 }
